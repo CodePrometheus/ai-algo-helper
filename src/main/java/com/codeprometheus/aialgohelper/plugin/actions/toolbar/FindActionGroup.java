@@ -1,0 +1,105 @@
+package com.codeprometheus.aialgohelper.plugin.actions.toolbar;
+
+import com.google.common.collect.Lists;
+import com.intellij.openapi.actionSystem.ActionGroup;
+import com.intellij.openapi.actionSystem.ActionUpdateThread;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.ex.ActionUtil;
+import com.intellij.openapi.project.DumbAware;
+import com.codeprometheus.aialgohelper.plugin.manager.NavigatorAction;
+import com.codeprometheus.aialgohelper.plugin.model.Constant;
+import com.codeprometheus.aialgohelper.plugin.model.Find;
+import com.codeprometheus.aialgohelper.plugin.model.PluginConstant;
+import com.codeprometheus.aialgohelper.plugin.model.Tag;
+import com.codeprometheus.aialgohelper.plugin.utils.DataKeys;
+import com.codeprometheus.aialgohelper.plugin.window.WindowFactory;
+import icons.LeetCodeEditorIcons;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+
+/**
+ * @author shuzijun
+ */
+public class FindActionGroup extends ActionGroup implements DumbAware {
+
+    private int i = 0;
+
+    public FindActionGroup() {
+        getTemplatePresentation().putClientProperty(ActionUtil.SHOW_TEXT_IN_TOOLBAR, true);
+    }
+
+    @Override
+    public void update(AnActionEvent e) {
+        NavigatorAction navigatorAction = WindowFactory.getDataContext(e.getProject()).getData(DataKeys.LEETCODE_PROJECTS_NAVIGATORACTION);
+
+        String id = e.getActionManager().getId(this);
+        List<Tag> tags = getTags(id, navigatorAction.getFind());
+
+        if (tags != null && !tags.isEmpty()) {
+            for (Tag tag : tags) {
+                if (tag.isSelect()) {
+                    e.getPresentation().setIcon(LeetCodeEditorIcons.FILTER);
+                    return;
+                }
+            }
+        }
+        e.getPresentation().setIcon(null);
+    }
+
+
+    @Override
+    public AnAction[] getChildren(AnActionEvent anActionEvent) {
+        List<AnAction> anActionList = Lists.newArrayList();
+        String id = anActionEvent.getActionManager().getId(this);
+        NavigatorAction navigatorAction = WindowFactory.getDataContext(anActionEvent.getProject()).getData(DataKeys.LEETCODE_PROJECTS_NAVIGATORACTION);
+        List<Tag> tags = getTags(id, navigatorAction.getFind());
+
+        if (tags != null && !tags.isEmpty()) {
+            for (Tag tag : tags) {
+                anActionList.add(new FindTagAction(tag.getName(), tag, tags, onlyOne(id), getFilterKey(id)));
+            }
+        }
+        AnAction[] anActions = new AnAction[anActionList.size()];
+        anActionList.toArray(anActions);
+        return anActions;
+    }
+
+    private List<Tag> getTags(String id, Find find) {
+        return find.getFilter(getKey(id));
+    }
+
+    private boolean onlyOne(String id) {
+        if (PluginConstant.LEETCODE_FIND_TAGS.equals(id)) {
+            return false;
+        }
+        if (PluginConstant.LEETCODE_ALL_FIND_TAGS.equals(id)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private String getFilterKey(String id) {
+        String key = getKey(id);
+        if (Constant.FIND_TYPE_LISTS.equalsIgnoreCase(key)) {
+            return "listId";
+        } else if (Constant.FIND_TYPE_CATEGORY.equalsIgnoreCase(key)) {
+            return "categorySlug";
+        } else if (Constant.CODETOP_FIND_TYPE_COMPANY.equalsIgnoreCase(key)) {
+            return "listId";
+        } else {
+            return key;
+        }
+    }
+
+    private String getKey(String id) {
+        return id.replace(PluginConstant.LEETCODE_FIND_PREFIX, "").replace(PluginConstant.LEETCODE_ALL_FIND_PREFIX, "").replace(PluginConstant.LEETCODE_CODETOP_FIND_PREFIX, "");
+    }
+
+    @Override
+    public @NotNull ActionUpdateThread getActionUpdateThread() {
+        return  ActionUpdateThread.EDT;
+    }
+}

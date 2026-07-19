@@ -1,0 +1,30 @@
+package com.codeprometheus.aialgohelper.plugin.listener;
+
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.project.DumbAware;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.startup.StartupActivity;
+import com.intellij.ui.jcef.JBCefApp;
+import com.codeprometheus.aialgohelper.plugin.model.PluginConstant;
+import org.jetbrains.annotations.NotNull;
+
+/**
+ * @author shuzijun
+ */
+public class SupportCheck implements StartupActivity, DumbAware {
+
+    public static boolean isFirstProject = true;
+
+    @Override
+    public void runActivity(@NotNull Project project) {
+        if (ApplicationManager.getApplication().isUnitTestMode() ||  !isFirstProject ) {
+            return;
+        }
+        if(!JBCefApp.isSupported()){
+            Notifications.Bus.notify(new Notification(PluginConstant.NOTIFICATION_GROUP, "JCEF is unavailable", "AI Algo Helper requires JCEF. Check the Registry option 'ide.browser.jcef.enabled'.", NotificationType.ERROR));
+        }
+    }
+}

@@ -1,0 +1,11 @@
+AI Algo Helper
+
+This product is derived from leetcode-editor version 8.16.0:
+https://github.com/shuzijun/leetcode-editor
+
+The original work was developed by shuzijun and its contributors and
+is licensed under the Apache License, Version 2.0.
+
+AI Algo Helper contains modifications by CodePrometheus, including
+project rebranding, IntelliJ Platform modernization, privacy cleanup,
+HTTP transport replacement, and compatibility fixes.

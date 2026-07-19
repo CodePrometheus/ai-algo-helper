@@ -1,161 +1,71 @@
-# [![Leetcode Editor][plugin-logo]][gh:leetcode-editor] Leetcode Editor 
+> [!NOTE]
+> **Fork 声明：** AI Algo Helper 是 [shuzijun/leetcode-editor](https://github.com/shuzijun/leetcode-editor) 的独立 Fork，基于上游 **8.16.0**。感谢原作者及所有贡献者的工作。本项目保留上游署名，并继续遵循 [Apache License 2.0](LICENSE)。
 
-[![Release][badge:release]][gh:releases]
-[![Snapshot][badge:snapshot]][gh:snapshot]
-[![License][badge:license]][gh:license]
-[![Plugin Homepage][badge:plugin-homepage]][plugin-homepage]
-[![Version][badge:version]][plugin-versions]
-[![Pro Plugin Homepage][badge:plugin-homepage-pro]][plugin-homepage-pro]
-[![Version][badge:pro-version]][plugin-versions-pro]
-[![Downloads][badge:downloads]][plugin-homepage]
-[![English Document][badge:en-doc]][gh:en-doc]
-[![中文文档][badge:zh-doc]][gh:zh-doc]
-[![捐赠][badge:donate]][shuzijun-donate]
-[![内推][badge:referrals]][shuzijun-referrals]  
+# AI Algo Helper
 
-<p align="center"><img src="https://cdn.jsdelivr.net/gh/shuzijun/blog-comment@v0.0.1/doc/leetcode-demo.gif" alt="demo" style="width: auto;height: auto;max-width: 90%; max-height: 90%;"></p>
+[English](README.md)
 
----
+AI Algo Helper 是一款用于算法练习的 IntelliJ IDEA 插件。
 
-## 简介  
-  在IDE中解决LeetCode问题,支持`leetcode.com`与`leetcode.cn`,满足做题和调试的需求。  
-  理论上支持: **IntelliJ IDEA**,**PhpStorm**,**WebStorm**,**PyCharm**,**RubyMine**,**AppCode**,**CLion**,**GoLand**,**DataGrip**,**Rider MPS**,**Android Studio**。  
+> AI Algo Helper 是独立的开源项目，与 LeetCode 无隶属关系，也未获得其官方背书。
 
-  - [English Document][gh:en-doc]
-  - [中文文档][gh:zh-doc]
+## 现有功能
 
-  - 有用的链接
-    - [登录帮助][gh:login-help]
-    - [自定义代码生成][gh:custom-code-zh] ([示例][gh:leetcode-question])
-    
-  - **更开放的功能**: [shuzijun/lc-sdk](https://github.com/shuzijun/lc-sdk)
+- 在 IntelliJ IDEA 内浏览和搜索 LeetCode 题目。
+- 查看题目描述、示例和可用题解。
+- 通过可配置模板生成本地解题文件。
+- 不离开 IDE 即可运行和提交代码。
+- 查看提交记录并跟踪练习进度。
 
+## 8.17.0 — Fork 起点
 
-##  开始使用 
-<p align="center"><img src="https://cdn.jsdelivr.net/gh/shuzijun/leetcode-editor@master/doc/leetcode-editor-3.0.gif" alt="start" style="width: auto;height: auto;max-width: 90%; max-height: 90%;"></p>
- 
+`8.17.0` 是从上游 `8.16.0` Fork 后，AI Algo Helper 的首个版本线。
 
-## 本地调试  
-<p align="center"><img src="https://cdn.jsdelivr.net/gh/shuzijun/leetcode-editor@master/doc/customConfig-100.gif" alt="loacl" style="width: auto;height: auto;max-width: 90%; max-height: 90%;"></p>
+- 将插件、构建产物、Action、设置页、工具窗口和 Java 包统一更名为 **AI Algo Helper** 与 `com.codeprometheus.aialgohelper`。
+- 开发栈升级到 IntelliJ IDEA `2026.2`、IntelliJ Platform Gradle Plugin `2.18.1`、Gradle `9.5.0`、Kotlin `2.4.10` 和 JBR/JDK `25`。
+- 声明新版 IntelliJ IDEA 所需的模块化 JCEF 依赖。
+- 移除会导致启动失败的旧版 Apache Commons Collections 用法。
+- 移除继承自上游的 Sentry、百度统计、设备标识符，以及绑定上游 Marketplace 条目的自定义更新逻辑。
+- 移除采用 GPL 许可证且包含不安全 TLS 实现的 `lc-sdk`。
+- 移除未使用且采用 GPL 许可证的 JLaTeXMath 依赖。
+- 基于 JetBrains 平台 API 重建 HTTP 访问，使用标准 TLS 校验，并支持 IDE 代理/PAC、Cookie 和有限次数重定向。
+- 增加本地回归测试，覆盖 GET、携带 Cookie/CSRF 的重定向和 POST 请求体。
 
+## 兼容性
 
-### 安装([help][managing-plugins])  
-- **通过插件库安装** [leetcode-editor][plugin-homepage]  
-- **下载文件安装** [releases][gh:releases]  
-- **如果您想捐助此项目,可以选择Pro版本** [leetcode-editor-pro][plugin-homepage-pro]
+当前开发基线为：
 
-### 配置(第一次安装需要先配置)  
+- IntelliJ IDEA `2026.2`
+- IntelliJ Platform build `262`
+- JBR/JDK `25`
 
-<p align="center"><img src="https://cdn.jsdelivr.net/gh/shuzijun/leetcode-editor@master/doc/config-3.0.jpg" alt="config" style="width: auto;height: auto;max-width: 90%; max-height: 90%;"></p>
+## 从源码构建
 
- 
-- **配置路径**: `File` -> `settings`->`tools`->`leetcode plugin`  
-  - **`URL可选项`**: `leetcode.com`与`leetcode.cn`  
-  - **`Code Type`**: `Java`,`Python`,`C++`,`Python3`,`C`,`C#`,`JavaScript`,`Ruby`,`Swift`,`Go` ,`Scala`,`Kotlin`,`Rust`,`PHP`,`Bash`,`SQL`   
-  - **`LoginName`**: 登录用户名
-  - **`Password`**: 登录密码  
-  - **`Temp File Path`**: 临时文件存放目录  
-  - **`proxy(HTTP Proxy)`**: 使用http代理,配置路径:`File` -> `settings`->`Appearance & Behavior`->`System Settings`->`HTTP Proxy`
-  - **`Custom code template`**: 自定义代码生成模板 ([详细介绍][gh:custom-code-zh])([示例][gh:leetcode-question])  
-  - **`LevelColour`**: 自定义题目难度颜色,重启后生效  
-  - **`English Content`**: 题目显示英文描述  
-  
-### 窗口    
+使用 JDK 25，然后运行：
 
-<p align="center"><img src="https://cdn.jsdelivr.net/gh/shuzijun/leetcode-editor@master/doc/window-3.0.jpg" alt="window" style="width: auto;height: auto;max-width: 90%; max-height: 90%;"></p> 
-  
-- **工具栏**:  
-  - ![login][icon:login]**`登录`**:两个网站的登录帐号不互通，切换网站需配置对应的用户  
-  - ![logout][icon:logout]**`退出`**:退出当前账户,如遇到登录错误,尝试先进行退出  
-  - ![refresh][icon:refresh]**`刷新`**:在未登录的情况下也可查看刷新加载题目，但是无法提交  
-  - ![pick][icon:pick]**`随机`**:随机一个题目
-  - ![find][icon:find]**`查找`**:打开筛选面板,可以进行搜索、过滤或者排序.  
-  - ![progress][icon:progress]**`会话`**:打开进度面板,可以查看或者切换进度.
-  - ![toggle][icon:toggle]**`切换列表`**:切换到其他列表窗口,包括"所有题目列表"、"分页题目列表"、"CodeTop题目列表".
-  - ![config][icon:config]**`配置`**:快捷跳转到配置界面  
-  - ![clear][icon:clear]**`清理`**:清理配置的缓存目录下的文件，两个网站对应的缓存目录不同，只会清理当前配置的网站下的。部分题目未提交的情况下慎重清理  
+```shell
+./gradlew test
+./gradlew buildPlugin
+```
 
-### 菜单  
-<p align="center"><img src="https://cdn.jsdelivr.net/gh/shuzijun/leetcode-editor@master/doc/menu-3.0.jpg" alt="menu" style="width: auto;height: auto;max-width: 90%; max-height: 90%;"></p>
-   
+如需使用本机安装的 IntelliJ IDEA 构建：
 
-- **菜单(在题目上右击出现)**:  
-  - **`open question`**:打开题目,在题目上双击也可以打开  
-  - **`open content`**:查看描述，包含图片(依赖 Markdown)  
-  - **`Submit`**:提交题目  
-  - **`Submissions`**:查看提交记录,在弹出的窗口上选择记录查看详情(`Show detail`)  
-  - **`Run Code`**:运行代码,默认使用题目的测试用例  
-  - **`Testcase`**:自定义测试用例  
-  - **`favorite`**:添加或移除收藏
-  - **`Clear cache`**:清理当前题目  
-  - **`Timer`**:计时器,开启后在右下角状态栏提示解题时间    
+```shell
+./gradlew buildPlugin -PlocalIdePath="/path/to/IntelliJ IDEA"
+```
 
-<br>  
+插件安装包会生成在 `build/distributions/`。
 
-- **Editor菜单(在Editor上右击出现)**:  
-  功能同上  
+## 隐私与安全
 
-<br>  
+- AI Algo Helper 不包含分析统计或遥测。
+- 不生成持久化的设备追踪标识。
+- 只有在使用对应插件功能时，才会向 LeetCode 发起网络请求。
+- 账号凭据通过 JetBrains PasswordSafe 保存。
+- HTTPS 使用正常的证书和主机名校验。
 
-- **问题编辑器**:
-  - **`Content`**:查看描述，包含图片
-  - **`Solution`**:查看解答
-  - **`Submissions`**:查看提交记录
-  - **`Note`**:查看笔记
-  
-### 常见问题  
-  [常见问题][gh:question] 
+## 上游署名与许可证
 
-### 支持和捐赠
-* [捐赠][shuzijun-donate]
-* [内推][shuzijun-referrals]
+本项目保留上游项目历史、版权声明和署名，具体来源见文首 Fork 声明。
 
-
-[plugin-logo]: https://cdn.jsdelivr.net/gh/shuzijun/leetcode-editor@master/src/main/resources/META-INF/pluginIcon.svg
-
-[badge:plugin-homepage]: https://img.shields.io/badge/Plugin%20Home-Leetcode%20Editor-blue?logo=jetbrains&style=flat-square
-[badge:plugin-homepage-pro]: https://img.shields.io/badge/Pro%20Plugin%20Home-Leetcode%20Editor%20Pro-blue?logo=jetbrains&style=flat-square&color=blueviolet
-[badge:release]: https://img.shields.io/github/actions/workflow/status/shuzijun/leetcode-editor/release.yml?branch=master&style=flat-square&logo=github&&label=Release%20Build
-[badge:snapshot]: https://img.shields.io/github/actions/workflow/status/shuzijun/leetcode-editor/snapshot.yml?branch=master&style=flat-square&logo=github&&label=Snapshot%20Build
-[badge:license]: https://img.shields.io/github/license/shuzijun/leetcode-editor.svg?style=flat-square&&label=License
-[badge:downloads]: https://img.shields.io/jetbrains/plugin/d/12132?style=flat-square&label=Plugin%20Downloads&logo=jetbrains
-[badge:version]: https://img.shields.io/jetbrains/plugin/v/12132?label=Plugin%20Version&logo=jetbrains&style=flat-square
-[badge:pro-version]: https://img.shields.io/jetbrains/plugin/v/17166?label=Pro%20Plugin%20Version&logo=jetbrains&style=flat-square&color=blueviolet
-[badge:en-doc]: https://img.shields.io/badge/Docs-English%20Document-blue?logo=docs&style=flat-square
-[badge:zh-doc]: https://img.shields.io/badge/Docs-中文文档-blue?logo=docs&style=flat-square
-[badge:donate]: https://img.shields.io/badge/Docs-捐赠-ff69c4?logo=docs&style=flat-square
-[badge:referrals]: https://img.shields.io/badge/Docs-内推-ff69c4?logo=docs&style=flat-square
-
-
-[icon:leetcode]: https://cdn.jsdelivr.net/gh/shuzijun/leetcode-editor@master/src/main/resources/icons/LeetCode_dark.svg
-[icon:login]: https://cdn.jsdelivr.net/gh/shuzijun/leetcode-editor@master/src/main/resources/icons/login_dark.svg
-[icon:logout]: https://cdn.jsdelivr.net/gh/shuzijun/leetcode-editor@master/src/main/resources/icons/logout_dark.svg
-[icon:refresh]: https://cdn.jsdelivr.net/gh/shuzijun/leetcode-editor@master/src/main/resources/icons/refresh_dark.svg
-[icon:pick]: https://cdn.jsdelivr.net/gh/shuzijun/leetcode-editor@master/src/main/resources/icons/random_dark.svg
-[icon:find]: https://cdn.jsdelivr.net/gh/shuzijun/leetcode-editor@master/src/main/resources/icons/find_dark.svg
-[icon:progress]: https://cdn.jsdelivr.net/gh/shuzijun/leetcode-editor@master/src/main/resources/icons/progress_dark.svg
-[icon:toggle]: https://cdn.jsdelivr.net/gh/shuzijun/leetcode-editor@master/src/main/resources/icons/toggle_dark.svg
-[icon:config]: https://cdn.jsdelivr.net/gh/shuzijun/leetcode-editor@master/src/main/resources/icons/config_lc_dark.svg
-[icon:clear]: https://cdn.jsdelivr.net/gh/shuzijun/leetcode-editor@master/src/main/resources/icons/clear_dark.svg
-
-
-
-[gh:leetcode-editor]: https://github.com/shuzijun/leetcode-editor
-[gh:releases]: https://github.com/shuzijun/leetcode-editor/releases
-[gh:snapshot]: https://github.com/shuzijun/leetcode-editor/actions?query=workflow%3ASnapshot
-[gh:license]: https://github.com/shuzijun/leetcode-editor/blob/master/LICENSE
-[gh:en-doc]: https://github.com/shuzijun/leetcode-editor/blob/master/README.md
-[gh:zh-doc]: #简介
-[gh:login-help]: https://github.com/shuzijun/leetcode-editor/blob/master/doc/LoginHelp_ZH.md
-[gh:custom-code-zh]: https://github.com/shuzijun/leetcode-editor/blob/master/doc/CustomCode_ZH.md
-[gh:leetcode-question]: https://github.com/shuzijun/leetcode-question
-[gh:question]: https://github.com/shuzijun/leetcode-editor/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98
-
-[plugin-homepage]: https://plugins.jetbrains.com/plugin/12132-leetcode-editor
-[plugin-versions]: https://plugins.jetbrains.com/plugin/12132-leetcode-editor/versions
-[plugin-homepage-pro]: https://plugins.jetbrains.com/plugin/17166-leetcode-editor-pro
-[plugin-versions-pro]: https://plugins.jetbrains.com/plugin/17166-leetcode-editor-pro/versions
-[managing-plugins]: https://www.jetbrains.com/help/idea/managing-plugins.html
-
-[shuzijun-donate]: https://shuzijun.cn/donate.html
-[shuzijun-referrals]: https://shuzijun.cn/referrals.html
+本项目采用 [Apache License 2.0](LICENSE) 发布，署名与修改声明见 [NOTICE](NOTICE)。

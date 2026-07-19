@@ -5,16 +5,16 @@ import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 plugins {
     id("java") // Java support
     alias(libs.plugins.kotlin) // Kotlin support
-    alias(libs.plugins.intelliJPlatform) version "2.7.1" // IntelliJ Platform Gradle Plugin
+    alias(libs.plugins.intelliJPlatform) // IntelliJ Platform Gradle Plugin
     alias(libs.plugins.changelog) // Gradle Changelog Plugin
 }
 
 group = providers.gradleProperty("pluginGroup").get()
 version = System.getenv("LD_VERSION") ?: providers.gradleProperty("pluginVersion").get()
 
-// Set the JVM language level used to build the project.
+// IntelliJ Platform 2026.2 runs on Java 25.
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(25)
 }
 
 // Configure project's dependencies
@@ -31,13 +31,8 @@ repositories {
 
 // Dependencies are managed with Gradle version catalog - read more: https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
 dependencies {
-    api("com.shuzijun:lc-sdk:0.0.3")
     api("com.alibaba:fastjson:1.2.47")
     api("org.jsoup:jsoup:1.11.3")
-    api("io.sentry:sentry:1.7.9") {
-        exclude(module = "slf4j-api")
-    }
-    api("org.scilab.forge:jlatexmath:1.0.7")
     api("org.apache.commons:commons-lang3:3.9")
     api("com.vladsch.flexmark:flexmark:0.62.2")
     api("com.vladsch.flexmark:flexmark-ext-attributes:0.62.2")
@@ -49,7 +44,13 @@ dependencies {
 
     // IntelliJ Platform Gradle Plugin Dependencies Extension - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-dependencies-extension.html
     intellijPlatform {
-        create(providers.gradleProperty("platformType"), providers.gradleProperty("platformVersion"))
+        val localIdePath = providers.gradleProperty("localIdePath")
+        if (localIdePath.isPresent) {
+            local(localIdePath)
+        } else {
+            intellijIdea(providers.gradleProperty("platformVersion"))
+        }
+        bundledPlugin("com.intellij.modules.jcef")
 
         // Plugin Dependencies. Uses `platformBundledPlugins` property from the gradle.properties file for bundled IntelliJ Platform plugins.
         //bundledPlugins(providers.gradleProperty("platformBundledPlugins").map { it.split(',') })
@@ -67,7 +68,7 @@ dependencies {
 // Configure IntelliJ Platform Gradle Plugin - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-extension.html
 intellijPlatform {
     pluginConfiguration {
-        name = providers.gradleProperty("pluginName")
+        name = providers.gradleProperty("pluginDisplayName")
         version = project.version.toString()
 
         // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
@@ -77,7 +78,7 @@ intellijPlatform {
         // Get the latest available change notes from the changelog file
         changeNotes = with(changelog) {
             renderItem(
-                (getOrNull(project.version.toString() + ".0") ?: getUnreleased())
+                (getOrNull(project.version.toString()) ?: getUnreleased())
                     .withHeader(false)
                     .withEmptySections(false),
                 Changelog.OutputType.HTML,
@@ -86,6 +87,7 @@ intellijPlatform {
 
         ideaVersion {
             sinceBuild = providers.gradleProperty("pluginSinceBuild")
+            untilBuild = providers.gradleProperty("pluginUntilBuild")
         }
     }
 
@@ -112,6 +114,19 @@ changelog {
 
 
 tasks {
+    processResources {
+        from(rootProject.file("LICENSE")) {
+            into("META-INF")
+        }
+        from(rootProject.file("NOTICE")) {
+            into("META-INF")
+        }
+    }
+
+    withType<JavaCompile>().configureEach {
+        options.compilerArgs.addAll(listOf("-Xlint:deprecation", "-Xlint:unchecked"))
+    }
+
     wrapper {
         gradleVersion = providers.gradleProperty("gradleVersion").get()
     }

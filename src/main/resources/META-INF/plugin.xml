@@ -1,8 +1,8 @@
 <idea-plugin>
-    <id>leetcode-editor</id>
-    <name>LeetCode Editor</name>
-    <version>8.1</version>
-    <vendor email="shuzijun0109@gmail.com" url="https://github.com/shuzijun/leetcode-editor">shuzijun</vendor>
+    <id>com.codeprometheus.aialgohelper</id>
+    <name>AI Algo Helper</name>
+    <version>8.17.0</version>
+    <vendor url="https://github.com/CodePrometheus/ai-algo-helper">CodePrometheus</vendor>
 
     <description><![CDATA[]]></description>
 
@@ -15,398 +15,399 @@
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
     <!-- uncomment to enable plugin in all products -->
+    <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.jcef</depends>
 
     <application-components>
 
     </application-components>
 
     <extensions defaultExtensionNs="com.intellij">
-        <postStartupActivity  implementation = "com.shuzijun.leetcode.plugin.listener.RegisterPluginInstallerStateListener"/>
-        <errorHandler implementation="com.shuzijun.leetcode.plugin.listener.ErrorReportHandler"/>
-        <toolWindow id="Leetcode" secondary="false" icon="LeetCodeEditorIcons.LEETCODE_TOOL_WINDOW" anchor="left"
-                    factoryClass="com.shuzijun.leetcode.plugin.window.WindowFactory" />
-        <toolWindow id="Leetcode Console" secondary="false" icon="LeetCodeEditorIcons.LEETCODE_TOOL_WINDOW" anchor="bottom"
-                    factoryClass="com.shuzijun.leetcode.plugin.window.ConsoleWindowFactory" />
-        <applicationService serviceInterface="com.shuzijun.leetcode.plugin.setting.PersistentConfig"
-                            serviceImplementation="com.shuzijun.leetcode.plugin.setting.PersistentConfig"/>
-        <projectService serviceInterface="com.shuzijun.leetcode.plugin.setting.ProjectConfig"
-                        serviceImplementation="com.shuzijun.leetcode.plugin.setting.ProjectConfig"/>
-        <projectService serviceInterface="com.shuzijun.leetcode.plugin.setting.StatisticsData"
-                        serviceImplementation="com.shuzijun.leetcode.plugin.setting.StatisticsData"/>
-        <applicationConfigurable groupId="tools" displayName="LeetCode Plugin" id="leetcode.id"
-                                 instance="com.shuzijun.leetcode.plugin.setting.SettingConfigurable"/>
-        <statusBarWidgetFactory id="leetcode-editor-TimerStatusBar" implementation="com.shuzijun.leetcode.plugin.timer.TimerStatusBarWidgetProvider"/>
-        <lang.foldingBuilder language="JAVA" implementationClass="com.shuzijun.leetcode.plugin.language.ScopeFoldingBuilder"/>
-        <lang.foldingBuilder language="Python" implementationClass="com.shuzijun.leetcode.plugin.language.ScopeFoldingBuilder"/>
-        <lang.foldingBuilder language="ObjectiveC" implementationClass="com.shuzijun.leetcode.plugin.language.ScopeFoldingBuilder"/>
-        <lang.foldingBuilder language="CS" implementationClass="com.shuzijun.leetcode.plugin.language.ScopeFoldingBuilder"/>
-        <!--<lang.foldingBuilder language="ECMAScript 6" implementationClass="com.shuzijun.leetcode.plugin.language.ScopeFoldingBuilder"/>-->
-        <lang.foldingBuilder language="ruby" implementationClass="com.shuzijun.leetcode.plugin.language.ScopeFoldingBuilder"/>
-        <lang.foldingBuilder language="Swift" implementationClass="com.shuzijun.leetcode.plugin.language.ScopeFoldingBuilder"/>
-        <lang.foldingBuilder language="go" implementationClass="com.shuzijun.leetcode.plugin.language.ScopeFoldingBuilder"/>
-        <lang.foldingBuilder language="Scala" implementationClass="com.shuzijun.leetcode.plugin.language.ScopeFoldingBuilder"/>
-        <lang.foldingBuilder language="kotlin" implementationClass="com.shuzijun.leetcode.plugin.language.ScopeFoldingBuilder"/>
-        <lang.foldingBuilder language="Renderscript" implementationClass="com.shuzijun.leetcode.plugin.language.ScopeFoldingBuilder"/>
-        <lang.foldingBuilder language="PHP" implementationClass="com.shuzijun.leetcode.plugin.language.ScopeFoldingBuilder"/>
-        <lang.foldingBuilder language="Shell Script" implementationClass="com.shuzijun.leetcode.plugin.language.ScopeFoldingBuilder"/>
-        <lang.foldingBuilder language="GenericSQL" implementationClass="com.shuzijun.leetcode.plugin.language.ScopeFoldingBuilder"/>
-        <lang.foldingBuilder language="TypeScript" implementationClass="com.shuzijun.leetcode.plugin.language.ScopeFoldingBuilder"/>
+        <postStartupActivity  implementation = "com.codeprometheus.aialgohelper.plugin.listener.RegisterPluginInstallerStateListener"/>
+        <toolWindow id="AI Algo Helper" secondary="false" icon="LeetCodeEditorIcons.LEETCODE_TOOL_WINDOW" anchor="left"
+                    factoryClass="com.codeprometheus.aialgohelper.plugin.window.WindowFactory" />
+        <toolWindow id="AI Algo Helper Console" secondary="false" icon="LeetCodeEditorIcons.LEETCODE_TOOL_WINDOW" anchor="bottom"
+                    factoryClass="com.codeprometheus.aialgohelper.plugin.window.ConsoleWindowFactory" />
+        <applicationService serviceInterface="com.codeprometheus.aialgohelper.plugin.setting.PersistentConfig"
+                            serviceImplementation="com.codeprometheus.aialgohelper.plugin.setting.PersistentConfig"/>
+        <projectService serviceInterface="com.codeprometheus.aialgohelper.plugin.setting.ProjectConfig"
+                        serviceImplementation="com.codeprometheus.aialgohelper.plugin.setting.ProjectConfig"/>
+        <projectService serviceInterface="com.codeprometheus.aialgohelper.plugin.setting.StatisticsData"
+                        serviceImplementation="com.codeprometheus.aialgohelper.plugin.setting.StatisticsData"/>
+        <applicationConfigurable parentId="tools" displayName="AI Algo Helper" id="com.codeprometheus.aialgohelper.settings"
+                                 instance="com.codeprometheus.aialgohelper.plugin.setting.SettingConfigurable"/>
+        <statusBarWidgetFactory id="ai-algo-helper-TimerStatusBar" implementation="com.codeprometheus.aialgohelper.plugin.timer.TimerStatusBarWidgetProvider"/>
+        <lang.foldingBuilder language="JAVA" implementationClass="com.codeprometheus.aialgohelper.plugin.language.ScopeFoldingBuilder"/>
+        <lang.foldingBuilder language="Python" implementationClass="com.codeprometheus.aialgohelper.plugin.language.ScopeFoldingBuilder"/>
+        <lang.foldingBuilder language="ObjectiveC" implementationClass="com.codeprometheus.aialgohelper.plugin.language.ScopeFoldingBuilder"/>
+        <lang.foldingBuilder language="CS" implementationClass="com.codeprometheus.aialgohelper.plugin.language.ScopeFoldingBuilder"/>
+        <!--<lang.foldingBuilder language="ECMAScript 6" implementationClass="com.codeprometheus.aialgohelper.plugin.language.ScopeFoldingBuilder"/>-->
+        <lang.foldingBuilder language="ruby" implementationClass="com.codeprometheus.aialgohelper.plugin.language.ScopeFoldingBuilder"/>
+        <lang.foldingBuilder language="Swift" implementationClass="com.codeprometheus.aialgohelper.plugin.language.ScopeFoldingBuilder"/>
+        <lang.foldingBuilder language="go" implementationClass="com.codeprometheus.aialgohelper.plugin.language.ScopeFoldingBuilder"/>
+        <lang.foldingBuilder language="Scala" implementationClass="com.codeprometheus.aialgohelper.plugin.language.ScopeFoldingBuilder"/>
+        <lang.foldingBuilder language="kotlin" implementationClass="com.codeprometheus.aialgohelper.plugin.language.ScopeFoldingBuilder"/>
+        <lang.foldingBuilder language="Renderscript" implementationClass="com.codeprometheus.aialgohelper.plugin.language.ScopeFoldingBuilder"/>
+        <lang.foldingBuilder language="PHP" implementationClass="com.codeprometheus.aialgohelper.plugin.language.ScopeFoldingBuilder"/>
+        <lang.foldingBuilder language="Shell Script" implementationClass="com.codeprometheus.aialgohelper.plugin.language.ScopeFoldingBuilder"/>
+        <lang.foldingBuilder language="GenericSQL" implementationClass="com.codeprometheus.aialgohelper.plugin.language.ScopeFoldingBuilder"/>
+        <lang.foldingBuilder language="TypeScript" implementationClass="com.codeprometheus.aialgohelper.plugin.language.ScopeFoldingBuilder"/>
 
-        <fileEditorProvider implementation="com.shuzijun.leetcode.plugin.editor.QuestionEditorProvider"/>
-        <fileIconPatcher implementation="com.shuzijun.leetcode.plugin.editor.QuestionEditorIconProvider" order="last"/>
-        <editorTabTitleProvider implementation="com.shuzijun.leetcode.plugin.editor.QuestionEditorTabTitleProvider"  order="last"/>
+        <fileEditorProvider implementation="com.codeprometheus.aialgohelper.plugin.editor.QuestionEditorProvider"/>
+        <fileIconPatcher implementation="com.codeprometheus.aialgohelper.plugin.editor.QuestionEditorIconProvider" order="last"/>
+        <editorTabTitleProvider implementation="com.codeprometheus.aialgohelper.plugin.editor.QuestionEditorTabTitleProvider"  order="last"/>
 
         <fileType name="lcvDoc" extensions="lcv;" fileNames=".lcv" language="lcvDoc"
-                  implementationClass="com.shuzijun.leetcode.plugin.editor.LCVFileType" fieldName="INSTANCE"/>
-        <fileEditorProvider implementation="com.shuzijun.leetcode.plugin.editor.LCVProvider"/>
-        <httpRequestHandler implementation="com.shuzijun.leetcode.plugin.editor.PreviewStaticServer"/>
-        <postStartupActivity implementation="com.shuzijun.leetcode.plugin.listener.SupportCheck"/>
+                  implementationClass="com.codeprometheus.aialgohelper.plugin.editor.LCVFileType" fieldName="INSTANCE"/>
+        <fileEditorProvider implementation="com.codeprometheus.aialgohelper.plugin.editor.LCVProvider"/>
+        <httpRequestHandler implementation="com.codeprometheus.aialgohelper.plugin.editor.PreviewStaticServer"/>
+        <postStartupActivity implementation="com.codeprometheus.aialgohelper.plugin.listener.SupportCheck"/>
     </extensions>
 
     <actions>
-        <action id="leetcode.LoginAction" class="com.shuzijun.leetcode.plugin.actions.toolbar.LoginAction"
+        <action id="aiAlgoHelper.LoginAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.LoginAction"
                 text="Sign in" description="Sign in" icon="LeetCodeEditorIcons.LOGIN">
         </action>
-        <action id="leetcode.LogoutAction" class="com.shuzijun.leetcode.plugin.actions.toolbar.LogoutAction"
+        <action id="aiAlgoHelper.LogoutAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.LogoutAction"
                 text="Sign out" description="Sign out" icon="LeetCodeEditorIcons.LOGOUT">
         </action>
-        <action id="leetcode.RefreshAction" class="com.shuzijun.leetcode.plugin.actions.toolbar.RefreshAction"
+        <action id="aiAlgoHelper.RefreshAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.RefreshAction"
                 text="Refresh question" description="Refreshquestion" icon="LeetCodeEditorIcons.REFRESH">
         </action>
-        <action id="leetcode.FindAction" class="com.shuzijun.leetcode.plugin.actions.toolbar.FindAction"
+        <action id="aiAlgoHelper.FindAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindAction"
                 text="Find question" description="Refreshquestion" icon="LeetCodeEditorIcons.FIND">
         </action>
-        <action id="leetcode.ProgressAction" class="com.shuzijun.leetcode.plugin.actions.toolbar.ProgressAction"
+        <action id="aiAlgoHelper.ProgressAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.ProgressAction"
                 text="Progress" description="Progress" icon="LeetCodeEditorIcons.PROGRESS">
         </action>
 
-        <action id="leetcode.ConfigAction" class="com.shuzijun.leetcode.plugin.actions.toolbar.ConfigAction"
+        <action id="aiAlgoHelper.ConfigAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.ConfigAction"
                 text="Settings" description="Settings" icon="LeetCodeEditorIcons.CONFIG">
         </action>
-        <action id="leetcode.ClearAllAction" class="com.shuzijun.leetcode.plugin.actions.toolbar.ClearAllAction"
+        <action id="aiAlgoHelper.ClearAllAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.ClearAllAction"
                 text="Clear cache" description="Clear cache" icon="LeetCodeEditorIcons.CLEAR">
         </action>
 
-        <action id="leetcode.HelpAction" class="com.shuzijun.leetcode.plugin.actions.toolbar.HelpAction"
+        <action id="aiAlgoHelper.HelpAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.HelpAction"
                 text="Help" description="Help" icon="LeetCodeEditorIcons.HELP">
         </action>
 
-        <action id="leetcode.ToggleListAction" class="com.shuzijun.leetcode.plugin.actions.toolbar.ToggleListAction"
+        <action id="aiAlgoHelper.ToggleListAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.ToggleListAction"
                 text="Toggle List" description="Toggle List" icon="LeetCodeEditorIcons.TOGGLE">
         </action>
 
-        <action id="leetcode.OpenAction" class="com.shuzijun.leetcode.plugin.actions.tree.OpenAction"
+        <action id="aiAlgoHelper.OpenAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.OpenAction"
                 text="open question" description="open question" icon="LeetCodeEditorIcons.QUESTION">
         </action>
 
-        <action id="leetcode.OpenContentAction" class="com.shuzijun.leetcode.plugin.actions.tree.OpenContentAction"
+        <action id="aiAlgoHelper.OpenContentAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.OpenContentAction"
                 text="open content" description="open content" icon="LeetCodeEditorIcons.DESC">
         </action>
-        <action id="leetcode.OpenSolutionAction" class="com.shuzijun.leetcode.plugin.actions.tree.OpenSolutionAction"
+        <action id="aiAlgoHelper.OpenSolutionAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.OpenSolutionAction"
                 text="open solution" description="open solution" icon="LeetCodeEditorIcons.SOLUTION">
         </action>
 
-        <action id="leetcode.OpenInWebAction" class="com.shuzijun.leetcode.plugin.actions.tree.OpenInWebAction"
+        <action id="aiAlgoHelper.OpenInWebAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.OpenInWebAction"
                 text="open in web" description="open in web" icon="LeetCodeEditorIcons.POPUP">
         </action>
 
-        <action id="leetcode.SubmitAction" class="com.shuzijun.leetcode.plugin.actions.tree.SubmitAction"
+        <action id="aiAlgoHelper.SubmitAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.SubmitAction"
                 text="Submit" description="Submit" icon="LeetCodeEditorIcons.SUBMIT">
         </action>
-        <action id="leetcode.SubmissionsAction" class="com.shuzijun.leetcode.plugin.actions.tree.SubmissionsAction"
+        <action id="aiAlgoHelper.SubmissionsAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.SubmissionsAction"
                 text="Submissions" description="Submissions" icon="LeetCodeEditorIcons.HISTORY">
         </action>
-        <action id="leetcode.RunCodeAction" class="com.shuzijun.leetcode.plugin.actions.tree.RunCodeAction"
+        <action id="aiAlgoHelper.RunCodeAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.RunCodeAction"
                 text="Run Code" description="Run Code" icon="LeetCodeEditorIcons.RUN">
         </action>
-        <action id="leetcode.TestcaseAction" class="com.shuzijun.leetcode.plugin.actions.tree.TestcaseAction"
+        <action id="aiAlgoHelper.TestcaseAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.TestcaseAction"
                 text="Testcase" description="Test case" icon="LeetCodeEditorIcons.EDIT_DOC">
         </action>
-        <action id="leetcode.ClearOneAction" class="com.shuzijun.leetcode.plugin.actions.tree.ClearOneAction"
+        <action id="aiAlgoHelper.ClearOneAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.ClearOneAction"
                 text="Clear cache" description="Clear cache" icon="LeetCodeEditorIcons.CLEAR">
         </action>
 
-        <action id="leetcode.PickAction" class="com.shuzijun.leetcode.plugin.actions.toolbar.PickAction"
+        <action id="aiAlgoHelper.PickAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.PickAction"
                 text="Pick one" description="Pick one" icon="LeetCodeEditorIcons.RANDOM">
         </action>
-        <action id="leetcode.positionAction" class="com.shuzijun.leetcode.plugin.actions.editor.PositionAction"
+        <action id="aiAlgoHelper.positionAction" class="com.codeprometheus.aialgohelper.plugin.actions.editor.PositionAction"
                 text="position" description="position" icon="LeetCodeEditorIcons.POSITION"/>
 
-        <group id="leetcode.NavigatorActionsToolbar">
-            <reference id="leetcode.LoginAction"/>
-            <reference id="leetcode.LogoutAction"/>
+        <group id="aiAlgoHelper.NavigatorActionsToolbar">
+            <reference id="aiAlgoHelper.LoginAction"/>
+            <reference id="aiAlgoHelper.LogoutAction"/>
             <separator/>
-            <reference id="leetcode.RefreshAction"/>
-            <reference id="leetcode.PickAction"/>
-            <reference id="leetcode.FindAction"/>
-            <reference id="leetcode.positionAction"/>
-            <reference id="leetcode.ProgressAction"/>
+            <reference id="aiAlgoHelper.RefreshAction"/>
+            <reference id="aiAlgoHelper.PickAction"/>
+            <reference id="aiAlgoHelper.FindAction"/>
+            <reference id="aiAlgoHelper.positionAction"/>
+            <reference id="aiAlgoHelper.ProgressAction"/>
             <separator/>
-            <reference id="leetcode.ToggleListAction"/>
-            <reference id="leetcode.ConfigAction"/>
-            <reference id="leetcode.ClearAllAction"/>
-            <reference id="leetcode.HelpAction"/>
-            <action id="leetcode.DonateAction" class="com.shuzijun.leetcode.plugin.actions.toolbar.DonateAction"
+            <reference id="aiAlgoHelper.ToggleListAction"/>
+            <reference id="aiAlgoHelper.ConfigAction"/>
+            <reference id="aiAlgoHelper.ClearAllAction"/>
+            <reference id="aiAlgoHelper.HelpAction"/>
+            <action id="aiAlgoHelper.DonateAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.DonateAction"
                     text="Donate" description="Donate" icon="LeetCodeEditorIcons.DONATE">
             </action>
         </group>
 
-        <group id="leetcode.NavigatorActionsMenu">
-            <reference id="leetcode.OpenAction"/>
-            <reference id="leetcode.OpenContentAction"/>
-            <reference id="leetcode.OpenSolutionAction"/>
-            <reference id="leetcode.OpenInWebAction"/>
+        <group id="aiAlgoHelper.NavigatorActionsMenu">
+            <reference id="aiAlgoHelper.OpenAction"/>
+            <reference id="aiAlgoHelper.OpenContentAction"/>
+            <reference id="aiAlgoHelper.OpenSolutionAction"/>
+            <reference id="aiAlgoHelper.OpenInWebAction"/>
             <separator/>
-            <reference id="leetcode.SubmitAction"/>
-            <reference id="leetcode.SubmissionsAction"/>
+            <reference id="aiAlgoHelper.SubmitAction"/>
+            <reference id="aiAlgoHelper.SubmissionsAction"/>
             <separator/>
-            <reference id="leetcode.RunCodeAction"/>
-            <reference id="leetcode.TestcaseAction"/>
+            <reference id="aiAlgoHelper.RunCodeAction"/>
+            <reference id="aiAlgoHelper.TestcaseAction"/>
             <separator/>
-            <group id="leetcode.FavoriteGroup" class="com.shuzijun.leetcode.plugin.actions.tree.FavoriteActionGroup"
+            <group id="aiAlgoHelper.FavoriteGroup" class="com.codeprometheus.aialgohelper.plugin.actions.tree.FavoriteActionGroup"
                    popup="true" text="Favorite" description="Favorite" icon="LeetCodeEditorIcons.FAVORITE">
             </group>
-            <group id="leetcode.note" popup="true" text="note" description="note" icon="LeetCodeEditorIcons.NOTE">
-                <action id="leetcode.ShowNote"
-                        class="com.shuzijun.leetcode.plugin.actions.tree.ShowNoteAction"
+            <group id="aiAlgoHelper.note" popup="true" text="note" description="note" icon="LeetCodeEditorIcons.NOTE">
+                <action id="aiAlgoHelper.ShowNote"
+                        class="com.codeprometheus.aialgohelper.plugin.actions.tree.ShowNoteAction"
                         text="ShowNote" description="Show Note" icon="LeetCodeEditorIcons.SHOW">
                 </action>
-                <action id="leetcode.PullNote" class="com.shuzijun.leetcode.plugin.actions.tree.PullNoteAction"
+                <action id="aiAlgoHelper.PullNote" class="com.codeprometheus.aialgohelper.plugin.actions.tree.PullNoteAction"
                         text="PullNote" description="Pull Note" icon="LeetCodeEditorIcons.PULL">
                 </action>
-                <action id="leetcode.PushNote" class="com.shuzijun.leetcode.plugin.actions.tree.PushNoteAction"
+                <action id="aiAlgoHelper.PushNote" class="com.codeprometheus.aialgohelper.plugin.actions.tree.PushNoteAction"
                         text="PushNote" description="Push Note" icon="LeetCodeEditorIcons.PUSH">
                 </action>
             </group>
             <separator/>
-            <group id="leetcode.timer" popup="true" text="Timer" description="timer" icon="LeetCodeEditorIcons.TIME">
-                <action id="leetcode.StartTimeAction"
-                        class="com.shuzijun.leetcode.plugin.actions.tree.StartTimeAction"
+            <group id="aiAlgoHelper.timer" popup="true" text="Timer" description="timer" icon="LeetCodeEditorIcons.TIME">
+                <action id="aiAlgoHelper.StartTimeAction"
+                        class="com.codeprometheus.aialgohelper.plugin.actions.tree.StartTimeAction"
                         text="Start" description="Start Time">
                 </action>
-                <action id="leetcode.StopTimeAction" class="com.shuzijun.leetcode.plugin.actions.tree.StopTimeAction"
+                <action id="aiAlgoHelper.StopTimeAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.StopTimeAction"
                         text="Stop" description="Stop Time">
                 </action>
-                <action id="leetcode.ResetTimeAction" class="com.shuzijun.leetcode.plugin.actions.tree.ResetTimeAction"
+                <action id="aiAlgoHelper.ResetTimeAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.ResetTimeAction"
                         text="Reset" description="Reset Time">
                 </action>
             </group>
             <separator/>
-            <reference id="leetcode.ClearOneAction"/>
+            <reference id="aiAlgoHelper.ClearOneAction"/>
         </group>
 
-        <group id="leetcode.find.Toolbar" popup="true" text="Status" description="Status">
-            <group id="leetcode.find.Category" class="com.shuzijun.leetcode.plugin.actions.toolbar.FindActionGroup"
+        <group id="aiAlgoHelper.find.Toolbar" popup="true" text="Status" description="Status">
+            <group id="aiAlgoHelper.find.Category" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindActionGroup"
                    popup="true" text="Category" description="Category">
             </group>
-            <group id="leetcode.find.Lists" class="com.shuzijun.leetcode.plugin.actions.toolbar.FindActionGroup" popup="true"
+            <group id="aiAlgoHelper.find.Lists" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindActionGroup" popup="true"
                    text="Lists" description="Lists">
             </group>
-            <group id="leetcode.find.Difficulty" class="com.shuzijun.leetcode.plugin.actions.toolbar.FindActionGroup"
+            <group id="aiAlgoHelper.find.Difficulty" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindActionGroup"
                    popup="true" text="Difficulty" description="Difficulty">
             </group>
-            <group id="leetcode.find.Status" class="com.shuzijun.leetcode.plugin.actions.toolbar.FindActionGroup" popup="true"
+            <group id="aiAlgoHelper.find.Status" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindActionGroup" popup="true"
                    text="Status" description="Status">
             </group>
-            <group id="leetcode.find.Tags" class="com.shuzijun.leetcode.plugin.actions.toolbar.FindActionGroup" popup="true"
+            <group id="aiAlgoHelper.find.Tags" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindActionGroup" popup="true"
                    text="Tags" description="Tags">
             </group>
             <separator/>
-            <action id="leetcode.find.Clear" class="com.shuzijun.leetcode.plugin.actions.toolbar.FindClearAction"
+            <action id="aiAlgoHelper.find.Clear" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindClearAction"
                     text="Clear find" description="Clear find " icon="LeetCodeEditorIcons.CLEAN">
             </action>
         </group>
 
-        <group id="leetcode.editor.group">
-            <action id="leetcode.editor.RunCodeAction" class="com.shuzijun.leetcode.plugin.actions.editor.RunCodeAction"
+        <group id="aiAlgoHelper.editor.group">
+            <action id="aiAlgoHelper.editor.RunCodeAction" class="com.codeprometheus.aialgohelper.plugin.actions.editor.RunCodeAction"
                     text="Run Code" description="Run Code(editor)" icon="LeetCodeEditorIcons.RUN">
             </action>
-            <action id="leetcode.editor.TestcaseAction"
-                    class="com.shuzijun.leetcode.plugin.actions.editor.TestcaseAction"
+            <action id="aiAlgoHelper.editor.TestcaseAction"
+                    class="com.codeprometheus.aialgohelper.plugin.actions.editor.TestcaseAction"
                     text="Testcase" description="Test case(editor)" icon="LeetCodeEditorIcons.EDIT_DOC">
             </action>
             <separator/>
-            <action id="leetcode.editor.SubmitAction" class="com.shuzijun.leetcode.plugin.actions.editor.SubmitAction"
+            <action id="aiAlgoHelper.editor.SubmitAction" class="com.codeprometheus.aialgohelper.plugin.actions.editor.SubmitAction"
                     text="Submit" description="Submit(editor)" icon="LeetCodeEditorIcons.SUBMIT">
             </action>
-            <action id="leetcode.editor.SubmissionsAction"
-                    class="com.shuzijun.leetcode.plugin.actions.editor.SubmissionsAction"
+            <action id="aiAlgoHelper.editor.SubmissionsAction"
+                    class="com.codeprometheus.aialgohelper.plugin.actions.editor.SubmissionsAction"
                     text="Submissions" description="Submissions(editor)" icon="LeetCodeEditorIcons.HISTORY">
             </action>
             <separator/>
-            <action id="leetcode.editor.OpenContentAction"
-                    class="com.shuzijun.leetcode.plugin.actions.editor.OpenContentAction"
+            <action id="aiAlgoHelper.editor.OpenContentAction"
+                    class="com.codeprometheus.aialgohelper.plugin.actions.editor.OpenContentAction"
                     text="open content" description="open content(editor)" icon="LeetCodeEditorIcons.DESC">
             </action>
-            <action id="leetcode.editor.OpenSolutionAction" class="com.shuzijun.leetcode.plugin.actions.editor.OpenSolutionAction"
+            <action id="aiAlgoHelper.editor.OpenSolutionAction" class="com.codeprometheus.aialgohelper.plugin.actions.editor.OpenSolutionAction"
                     text="open solution" description="open solution" icon="LeetCodeEditorIcons.SOLUTION">
             </action>
-            <action id="leetcode.editor.OpenInWebAction"
-                    class="com.shuzijun.leetcode.plugin.actions.editor.OpenInWebAction"
+            <action id="aiAlgoHelper.editor.OpenInWebAction"
+                    class="com.codeprometheus.aialgohelper.plugin.actions.editor.OpenInWebAction"
                     text="open in web" description="open in web(editor)" icon="LeetCodeEditorIcons.POPUP">
             </action>
             <separator/>
-            <reference id="leetcode.positionAction"/>
-            <group id="leetcode.editor.note" popup="true" text="note" description="note" icon="LeetCodeEditorIcons.NOTE">
-                <action id="leetcode.editor.ShowNote"
-                        class="com.shuzijun.leetcode.plugin.actions.editor.ShowNoteAction"
+            <reference id="aiAlgoHelper.positionAction"/>
+            <group id="aiAlgoHelper.editor.note" popup="true" text="note" description="note" icon="LeetCodeEditorIcons.NOTE">
+                <action id="aiAlgoHelper.editor.ShowNote"
+                        class="com.codeprometheus.aialgohelper.plugin.actions.editor.ShowNoteAction"
                         text="ShowNote" description="Show Note" icon="LeetCodeEditorIcons.SHOW">
                 </action>
-                <action id="leetcode.editor.PullNote" class="com.shuzijun.leetcode.plugin.actions.editor.PullNoteAction"
+                <action id="aiAlgoHelper.editor.PullNote" class="com.codeprometheus.aialgohelper.plugin.actions.editor.PullNoteAction"
                         text="PullNote" description="Pull Note" icon="LeetCodeEditorIcons.PULL">
                 </action>
-                <action id="leetcode.editor.PushNote" class="com.shuzijun.leetcode.plugin.actions.editor.PushNoteAction"
+                <action id="aiAlgoHelper.editor.PushNote" class="com.codeprometheus.aialgohelper.plugin.actions.editor.PushNoteAction"
                         text="PushNote" description="Push Note" icon="LeetCodeEditorIcons.PUSH">
                 </action>
             </group>
-            <group id="leetcode.editor.timer" popup="true" text="Timer" description="timer(editor)" icon="LeetCodeEditorIcons.TIME">
-                <action id="leetcode.editor.StartTimeAction"
-                        class="com.shuzijun.leetcode.plugin.actions.editor.StartTimeAction"
+            <group id="aiAlgoHelper.editor.timer" popup="true" text="Timer" description="timer(editor)" icon="LeetCodeEditorIcons.TIME">
+                <action id="aiAlgoHelper.editor.StartTimeAction"
+                        class="com.codeprometheus.aialgohelper.plugin.actions.editor.StartTimeAction"
                         text="Start" description="Start Time(editor)">
                 </action>
-                <action id="leetcode.editor.StopTimeAction" class="com.shuzijun.leetcode.plugin.actions.editor.StopTimeAction"
+                <action id="aiAlgoHelper.editor.StopTimeAction" class="com.codeprometheus.aialgohelper.plugin.actions.editor.StopTimeAction"
                         text="Stop" description="Stop Time(editor)">
                 </action>
-                <action id="leetcode.editor.ResetTimeAction" class="com.shuzijun.leetcode.plugin.actions.editor.ResetTimeAction"
+                <action id="aiAlgoHelper.editor.ResetTimeAction" class="com.codeprometheus.aialgohelper.plugin.actions.editor.ResetTimeAction"
                         text="Reset" description="Reset Time(editor)">
                 </action>
             </group>
         </group>
 
-        <group id="leetcode.editor.menu" class="com.shuzijun.leetcode.plugin.actions.editor.EditorMenuActionGroup"
-               text="leetcode editor menu" popup="true" icon="LeetCodeEditorIcons.LEETCODE_TOOL_WINDOW">
-            <reference id="leetcode.editor.group"/>
+        <group id="aiAlgoHelper.editor.menu" class="com.codeprometheus.aialgohelper.plugin.actions.editor.EditorMenuActionGroup"
+               text="AI Algo Helper menu" popup="true" icon="LeetCodeEditorIcons.LEETCODE_TOOL_WINDOW">
+            <reference id="aiAlgoHelper.editor.group"/>
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </group>
 
-        <group id="leetcode.find.SortToolbar" popup="true" text="Sort">
-            <action id="leetcode.sort.Sort"
-                    class="com.shuzijun.leetcode.plugin.actions.toolbar.SortAction"
+        <group id="aiAlgoHelper.find.SortToolbar" popup="true" text="Sort">
+            <action id="aiAlgoHelper.sort.Sort"
+                    class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
                     text="Sort:" description="label"/>
             <separator/>
-            <action id="leetcode.sort.SortByTitle" class="com.shuzijun.leetcode.plugin.actions.toolbar.SortAction"
+            <action id="aiAlgoHelper.sort.SortByTitle" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
                     text="Title" description="Sort By Title" icon="LeetCodeEditorIcons.SORT_ASC"/>
 
-            <action id="leetcode.sort.SortBySolution" class="com.shuzijun.leetcode.plugin.actions.toolbar.SortAction"
+            <action id="aiAlgoHelper.sort.SortBySolution" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
                     text="Solution" description="Sort By Solution" icon="LeetCodeEditorIcons.SORT_ASC"/>
 
-            <action id="leetcode.sort.SortByAcceptance"
-                    class="com.shuzijun.leetcode.plugin.actions.toolbar.SortAction"
+            <action id="aiAlgoHelper.sort.SortByAcceptance"
+                    class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
                     text="Acceptance" description="Sort By Acceptance" icon="LeetCodeEditorIcons.SORT_ASC"/>
 
-            <action id="leetcode.sort.SortByDifficulty"
-                    class="com.shuzijun.leetcode.plugin.actions.toolbar.SortAction"
+            <action id="aiAlgoHelper.sort.SortByDifficulty"
+                    class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
                     text="Difficulty" description="Sort By Difficulty" icon="LeetCodeEditorIcons.SORT_ASC"/>
 
-            <action id="leetcode.sort.SortByFrequency"
-                    class="com.shuzijun.leetcode.plugin.actions.toolbar.SortAction"
+            <action id="aiAlgoHelper.sort.SortByFrequency"
+                    class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
                     text="Frequency" description="Sort By Frequency" icon="LeetCodeEditorIcons.SORT_ASC"/>
         </group>
 
-        <action id="leetcode.PageSize" class="com.shuzijun.leetcode.plugin.actions.toolbar.page.PageSizeBoxAction"
+        <action id="aiAlgoHelper.PageSize" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.page.PageSizeBoxAction"
                 text="Page Size" description="Page Size">
         </action>
-        <action id="leetcode.PageList" class="com.shuzijun.leetcode.plugin.actions.toolbar.page.PageBoxAction"
+        <action id="aiAlgoHelper.PageList" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.page.PageBoxAction"
                 text="PageList" description="Page">
         </action>
-        <action id="leetcode.PreviousPage" class="com.shuzijun.leetcode.plugin.actions.toolbar.page.PreviousAction"
+        <action id="aiAlgoHelper.PreviousPage" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.page.PreviousAction"
                 text="Previous" description="Previous Page">
         </action>
-        <action id="leetcode.NextPage" class="com.shuzijun.leetcode.plugin.actions.toolbar.page.NextAction"
+        <action id="aiAlgoHelper.NextPage" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.page.NextAction"
                 text="Next" description="Next Page">
         </action>
-        <action id="leetcode.GoPage" class="com.shuzijun.leetcode.plugin.actions.toolbar.page.GoAction"
+        <action id="aiAlgoHelper.GoPage" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.page.GoAction"
                 text="Go" description="Go Page">
         </action>
 
-        <group id="leetcode.codetop.NavigatorActionsToolbar">
-            <reference id="leetcode.LoginAction"/>
-            <reference id="leetcode.LogoutAction"/>
+        <group id="aiAlgoHelper.codetop.NavigatorActionsToolbar">
+            <reference id="aiAlgoHelper.LoginAction"/>
+            <reference id="aiAlgoHelper.LogoutAction"/>
             <separator/>
-            <action id="leetcode.codetop.RefreshAction" class="com.shuzijun.leetcode.plugin.actions.toolbar.RefreshAction"
+            <action id="aiAlgoHelper.codetop.RefreshAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.RefreshAction"
                     text="Refresh question" description="Refreshquestion" icon="LeetCodeEditorIcons.REFRESH">
             </action>
-            <action id="leetcode.codetop.FindAction" class="com.shuzijun.leetcode.plugin.actions.toolbar.FindAction"
+            <action id="aiAlgoHelper.codetop.FindAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindAction"
                     text="Find question" description="Refreshquestion" icon="LeetCodeEditorIcons.FIND">
             </action>
-            <action id="leetcode.codetop.ShareAction" class="com.shuzijun.leetcode.plugin.actions.toolbar.ShareAction"
+            <action id="aiAlgoHelper.codetop.ShareAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.ShareAction"
                     text="Share" description="Share" icon="LeetCodeEditorIcons.SHARE">
             </action>
             <separator/>
-            <reference id="leetcode.ToggleListAction"/>
-            <reference id="leetcode.ConfigAction"/>
-            <reference id="leetcode.ClearAllAction"/>
-            <reference id="leetcode.HelpAction"/>
+            <reference id="aiAlgoHelper.ToggleListAction"/>
+            <reference id="aiAlgoHelper.ConfigAction"/>
+            <reference id="aiAlgoHelper.ClearAllAction"/>
+            <reference id="aiAlgoHelper.HelpAction"/>
         </group>
 
-        <group id="leetcode.codetop.find.Toolbar" popup="true" text="Status" description="Status">
-            <group id="leetcode.codetop.find.Difficulty" class="com.shuzijun.leetcode.plugin.actions.toolbar.FindActionGroup"
+        <group id="aiAlgoHelper.codetop.find.Toolbar" popup="true" text="Status" description="Status">
+            <group id="aiAlgoHelper.codetop.find.Difficulty" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindActionGroup"
                    popup="true" text="Difficulty" description="Difficulty">
             </group>
-            <group id="leetcode.codetop.find.Tags" class="com.shuzijun.leetcode.plugin.actions.toolbar.FindActionGroup" popup="true"
+            <group id="aiAlgoHelper.codetop.find.Tags" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindActionGroup" popup="true"
                    text="Tags" description="Tags">
             </group>
-            <group id="leetcode.codetop.find.Company" class="com.shuzijun.leetcode.plugin.actions.toolbar.FindActionGroup"
+            <group id="aiAlgoHelper.codetop.find.Company" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindActionGroup"
                    popup="true" text="Company" description="Company">
             </group>
             <separator/>
-            <action id="leetcode.codetop.find.Clear" class="com.shuzijun.leetcode.plugin.actions.toolbar.FindClearAction"
+            <action id="aiAlgoHelper.codetop.find.Clear" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindClearAction"
                     text="Clear find" description="Clear find " icon="LeetCodeEditorIcons.CLEAN">
             </action>
         </group>
 
-        <group id="leetcode.codetop.find.SortToolbar" popup="true" text="Sort">
-            <action id="leetcode.codetop.sort.Sort"
-                    class="com.shuzijun.leetcode.plugin.actions.toolbar.SortAction"
+        <group id="aiAlgoHelper.codetop.find.SortToolbar" popup="true" text="Sort">
+            <action id="aiAlgoHelper.codetop.sort.Sort"
+                    class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
                     text="Sort:" description="label"/>
             <separator/>
-            <action id="leetcode.codetop.sort.CodeTopSortByTitle" class="com.shuzijun.leetcode.plugin.actions.toolbar.SortAction"
+            <action id="aiAlgoHelper.codetop.sort.CodeTopSortByTitle" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
                     text="Title" description="Sort By Title" icon="LeetCodeEditorIcons.SORT_ASC"/>
 
-            <action id="leetcode.codetop.sort.CodeTopSortByTime" class="com.shuzijun.leetcode.plugin.actions.toolbar.SortAction"
+            <action id="aiAlgoHelper.codetop.sort.CodeTopSortByTime" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
                     text="Time" description="Sort By Time" icon="LeetCodeEditorIcons.SORT_ASC"/>
 
-            <action id="leetcode.codetop.sort.CodeTopSortByFrequency" class="com.shuzijun.leetcode.plugin.actions.toolbar.SortAction"
+            <action id="aiAlgoHelper.codetop.sort.CodeTopSortByFrequency" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
                     text="Frequency" description="Sort By Frequency" icon="LeetCodeEditorIcons.SORT_ASC"/>
         </group>
 
-        <group id="leetcode.all.find.Toolbar" popup="true" text="Status" description="Status">
-            <group id="leetcode.all.find.Category" class="com.shuzijun.leetcode.plugin.actions.toolbar.FindActionGroup"
+        <group id="aiAlgoHelper.all.find.Toolbar" popup="true" text="Status" description="Status">
+            <group id="aiAlgoHelper.all.find.Category" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindActionGroup"
                    popup="true" text="Category" description="Category">
             </group>
-            <group id="leetcode.all.find.Lists" class="com.shuzijun.leetcode.plugin.actions.toolbar.FindActionGroup" popup="true"
+            <group id="aiAlgoHelper.all.find.Lists" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindActionGroup" popup="true"
                    text="Lists" description="Lists">
             </group>
-            <group id="leetcode.all.find.Difficulty" class="com.shuzijun.leetcode.plugin.actions.toolbar.FindActionGroup"
+            <group id="aiAlgoHelper.all.find.Difficulty" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindActionGroup"
                    popup="true" text="Difficulty" description="Difficulty">
             </group>
-            <group id="leetcode.all.find.Status" class="com.shuzijun.leetcode.plugin.actions.toolbar.FindActionGroup" popup="true"
+            <group id="aiAlgoHelper.all.find.Status" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindActionGroup" popup="true"
                    text="Status" description="Status">
             </group>
-            <group id="leetcode.all.find.Tags" class="com.shuzijun.leetcode.plugin.actions.toolbar.FindActionGroup" popup="true"
+            <group id="aiAlgoHelper.all.find.Tags" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindActionGroup" popup="true"
                    text="Tags" description="Tags">
             </group>
             <separator/>
-            <action id="leetcode.all.find.Clear" class="com.shuzijun.leetcode.plugin.actions.toolbar.FindClearAction"
+            <action id="aiAlgoHelper.all.find.Clear" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindClearAction"
                     text="Clear find" description="Clear find " icon="LeetCodeEditorIcons.CLEAN">
             </action>
         </group>
 
-        <group id="leetcode.all.find.SortToolbar" popup="true" text="Sort">
-            <action id="leetcode.all.codetop.sort.Sort"
-                    class="com.shuzijun.leetcode.plugin.actions.toolbar.SortAction"
+        <group id="aiAlgoHelper.all.find.SortToolbar" popup="true" text="Sort">
+            <action id="aiAlgoHelper.all.codetop.sort.Sort"
+                    class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
                     text="Sort:" description="label"/>
             <separator/>
-            <action id="leetcode.all.sort.SortByTitle" class="com.shuzijun.leetcode.plugin.actions.toolbar.SortAction"
+            <action id="aiAlgoHelper.all.sort.SortByTitle" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
                     text="Title" description="Sort By Title" icon="LeetCodeEditorIcons.SORT_ASC"/>
 
-            <action id="leetcode.all.sort.SortByDifficulty"
-                    class="com.shuzijun.leetcode.plugin.actions.toolbar.SortAction"
+            <action id="aiAlgoHelper.all.sort.SortByDifficulty"
+                    class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
                     text="Difficulty" description="Sort By Difficulty" icon="LeetCodeEditorIcons.SORT_ASC"/>
 
-            <action id="leetcode.all.sort.SortByStates"
-                    class="com.shuzijun.leetcode.plugin.actions.toolbar.SortAction"
+            <action id="aiAlgoHelper.all.sort.SortByStates"
+                    class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
                     text="States" description="Sort By States" icon="LeetCodeEditorIcons.SORT_ASC"/>
         </group>
 

@@ -38,7 +38,7 @@
   ```java
     ${question.content}
     
-    package com.shuzijun.leetcode.editor.en;
+    package com.codeprometheus.aialgohelper.editor.en;
     public class $!velocityTool.camelCaseName(${question.titleSlug}){
         public static void main(String[] args) {
              Solution solution = new $!velocityTool.camelCaseName(${question.titleSlug})().new Solution();

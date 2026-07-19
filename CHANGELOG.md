@@ -1,11 +1,17 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# Leetcode Editor Changelog
-[![English Document][badge:en-doc]][gh:en-doc]
-[![中文文档][badge:zh-doc]][gh:zh-doc]
-[![捐赠][badge:donate]][shuzijun-donate]
-[![捐赠][badge:donate-zh]][shuzijun-donate]
-[![内推][badge:referrals]][shuzijun-referrals]
+# AI Algo Helper Changelog
+
+## 8.17.0
+
+### Changed
+
+- Rebranded the fork as AI Algo Helper.
+- Upgraded the build to IntelliJ Platform 2026.2, Gradle 9.5.0, and JBR 25.
+- Added the required JCEF module dependency for modern IntelliJ IDEA versions.
+- Removed legacy upstream telemetry and error reporting.
+- Replaced the legacy HTTP stack and removed unused GPL-licensed dependencies.
+- Updated CI and release workflows for the `main` branch and current toolchain.
 
 ## 8.16.0
 
