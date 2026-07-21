@@ -8,7 +8,7 @@ import com.codeprometheus.aialgohelper.plugin.model.PageInfo;
 import com.codeprometheus.aialgohelper.plugin.model.Question;
 import com.codeprometheus.aialgohelper.plugin.model.QuestionView;
 import com.codeprometheus.aialgohelper.plugin.window.NavigatorTableData;
-import icons.LeetCodeEditorIcons;
+import icons.AIAlgoHelperIcons;
 
 import javax.swing.*;
 import javax.swing.text.Style;
@@ -45,21 +45,21 @@ public class NavigatorTable extends NavigatorTableData<QuestionView> {
     @Override
     protected JTextPane firstToolTip() {
         List<Icon> icons = new ArrayList<>();
-        icons.add(LeetCodeEditorIcons.CONFIG);
-        icons.add(LeetCodeEditorIcons.LOGIN);
-        icons.add(LeetCodeEditorIcons.REFRESH);
-        icons.add(LeetCodeEditorIcons.TOGGLE);
-        icons.add(LeetCodeEditorIcons.LOGIN);
-        icons.add(LeetCodeEditorIcons.LOGOUT);
-        icons.add(LeetCodeEditorIcons.REFRESH);
-        icons.add(LeetCodeEditorIcons.RANDOM);
-        icons.add(LeetCodeEditorIcons.FIND);
-        icons.add(LeetCodeEditorIcons.POSITION);
-        icons.add(LeetCodeEditorIcons.PROGRESS);
-        icons.add(LeetCodeEditorIcons.TOGGLE);
-        icons.add(LeetCodeEditorIcons.CONFIG);
-        icons.add(LeetCodeEditorIcons.CLEAR);
-        icons.add(LeetCodeEditorIcons.HELP);
+        icons.add(AIAlgoHelperIcons.CONFIG);
+        icons.add(AIAlgoHelperIcons.LOGIN);
+        icons.add(AIAlgoHelperIcons.REFRESH);
+        icons.add(AIAlgoHelperIcons.TOGGLE);
+        icons.add(AIAlgoHelperIcons.LOGIN);
+        icons.add(AIAlgoHelperIcons.LOGOUT);
+        icons.add(AIAlgoHelperIcons.REFRESH);
+        icons.add(AIAlgoHelperIcons.RANDOM);
+        icons.add(AIAlgoHelperIcons.FIND);
+        icons.add(AIAlgoHelperIcons.POSITION);
+        icons.add(AIAlgoHelperIcons.PROGRESS);
+        icons.add(AIAlgoHelperIcons.TOGGLE);
+        icons.add(AIAlgoHelperIcons.CONFIG);
+        icons.add(AIAlgoHelperIcons.CLEAR);
+        icons.add(AIAlgoHelperIcons.HELP);
 
         Style style = new StyleContext().addStyle("boldStyle", null);
         StyleConstants.setBold(style, true);

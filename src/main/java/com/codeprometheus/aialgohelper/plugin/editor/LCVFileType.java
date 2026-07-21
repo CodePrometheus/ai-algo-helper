@@ -2,7 +2,7 @@ package com.codeprometheus.aialgohelper.plugin.editor;
 
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.codeprometheus.aialgohelper.plugin.model.PluginConstant;
-import icons.LeetCodeEditorIcons;
+import icons.AIAlgoHelperIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,6 +36,6 @@ public class LCVFileType extends LanguageFileType {
     @Nullable
     @Override
     public Icon getIcon() {
-        return LeetCodeEditorIcons.LCV;
+        return AIAlgoHelperIcons.LCV;
     }
 }

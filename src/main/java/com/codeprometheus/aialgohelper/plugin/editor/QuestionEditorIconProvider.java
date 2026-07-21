@@ -8,7 +8,7 @@ import com.codeprometheus.aialgohelper.plugin.model.LeetcodeEditor;
 import com.codeprometheus.aialgohelper.plugin.setting.PersistentConfig;
 import com.codeprometheus.aialgohelper.plugin.setting.ProjectConfig;
 import com.codeprometheus.aialgohelper.plugin.utils.LogUtils;
-import icons.LeetCodeEditorIcons;
+import icons.AIAlgoHelperIcons;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
@@ -42,6 +42,6 @@ public class QuestionEditorIconProvider implements FileIconPatcher {
             LogUtils.LOG.error("QuestionEditorIconProvider -> patchIcon", e);
             return baseIcon;
         }
-        return LeetCodeEditorIcons.LEETCODE_TOOL_WINDOW;
+        return AIAlgoHelperIcons.TOOL_WINDOW;
     }
 }

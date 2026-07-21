@@ -13,7 +13,7 @@ import com.codeprometheus.aialgohelper.plugin.model.PluginConstant;
 import com.codeprometheus.aialgohelper.plugin.model.Sort;
 import com.codeprometheus.aialgohelper.plugin.utils.DataKeys;
 import com.codeprometheus.aialgohelper.plugin.window.WindowFactory;
-import icons.LeetCodeEditorIcons;
+import icons.AIAlgoHelperIcons;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -33,9 +33,9 @@ public class SortAction extends AbstractAction implements DumbAware {
             return;
         }
         if (sort.getType() == Constant.SORT_ASC) {
-            e.getPresentation().setIcon(LeetCodeEditorIcons.SORT_ASC);
+            e.getPresentation().setIcon(AIAlgoHelperIcons.SORT_ASC);
         } else if (sort.getType() == Constant.SORT_DESC) {
-            e.getPresentation().setIcon(LeetCodeEditorIcons.SORT_DESC);
+            e.getPresentation().setIcon(AIAlgoHelperIcons.SORT_DESC);
         } else {
             e.getPresentation().setIcon(null);
         }

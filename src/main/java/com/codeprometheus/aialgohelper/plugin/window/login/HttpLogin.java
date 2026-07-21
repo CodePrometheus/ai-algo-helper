@@ -41,10 +41,13 @@ public class HttpLogin {
     }
 
     public static void loginSuccess(Project project, List<HttpCookie> cookieList) {
+        loginSuccess(project, URLUtils.getLeetcodeHost(), cookieList);
+    }
+
+    public static void loginSuccess(Project project, String host, List<HttpCookie> cookieList) {
         ProgressManager.getInstance().run(new Task.Backgroundable(project, PluginConstant.ACTION_PREFIX + ".loginSuccess", false) {
             @Override
             public void run(@NotNull ProgressIndicator progressIndicator) {
-                String host = URLUtils.getLeetcodeHost();
                 SessionCookieStore.save(host, CookieUtils.httpCookieToJSONString(cookieList));
                 MessageUtils.getInstance(project).showInfoMsg("info", PropertiesUtils.getInfo("login.success"));
                 NavigatorTabsPanel.loadUser(true);

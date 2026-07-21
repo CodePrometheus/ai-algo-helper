@@ -6,37 +6,30 @@
 
 ### Added
 
-- Added a dedicated Study Lists view with all 12 collapsible topic collections from [灵茶山艾府's scientific practice index](https://leetcode.cn/discuss/post/RvFUtj/), preserving author and source attribution.
-- Added solved and attempted status markers to study-list problems by reusing the existing cached question status.
-- Added PasswordSafe-backed storage for web sign-in session cookies.
-- Added regression tests for login actions, study-list catalogs and parsing, GET requests, redirects with cookie/CSRF propagation, and POST bodies.
+- Added a dedicated Study Lists view with all 12 topic collections from [灵茶山艾府's scientific practice index](https://leetcode.cn/discuss/post/RvFUtj/), organized as collapsible chapter trees with source attribution.
+- Added solved and attempted status markers directly to study-list problems.
+- Added built-in web sign-in for both leetcode.com and leetcode.cn, with session cookies stored through JetBrains PasswordSafe.
 
 ### Changed
 
-- Rebranded the plugin, artifact, actions, settings, tool windows, and Java packages as AI Algo Helper and `com.codeprometheus.aialgohelper`.
-- Upgraded the development stack to IntelliJ IDEA 2026.2, IntelliJ Platform Gradle Plugin 2.18.1, Gradle 9.5.0, Kotlin 2.4.10, and JBR/JDK 25.
-- Added the required JCEF module dependency for modern IntelliJ IDEA versions.
-- Replaced legacy account/password login with the built-in web sign-in dialog and PasswordSafe-backed session storage.
-- Rebuilt HTTP access on JetBrains platform APIs with standard TLS verification, IDE proxy/PAC support, cookies, and bounded redirects.
-- Made the JCEF problem preview follow the active IntelliJ UI theme and refresh when the theme changes.
-- Updated CI and release workflows for the `main` branch and current toolchain.
+- Reintroduced the plugin as AI Algo Helper, an independent fork focused on a modern IntelliJ IDEA algorithm-practice experience.
+- Introduced a new `AIgo` visual identity with dedicated Marketplace and tool-window icons.
+- Upgraded compatibility to IntelliJ IDEA 2026.2 and platform build 262.
+- Made problem content follow the active IntelliJ IDEA light or dark theme.
+- Updated the publisher display to Zixin Zhou · GitHub@CodePrometheus.
 
 ### Fixed
 
-- Removed obsolete Apache Commons Collections usage that caused startup failures.
-- Fixed Action updates and background-context access for the IntelliJ IDEA 2026.2 threading model.
-- Made Sign In open the web dialog directly instead of opening Settings first.
-- Normalized supported inline Markdown math in imported study-list content.
-- Fixed the packaged Marketplace description.
+- Fixed startup and toolbar compatibility with the IntelliJ IDEA 2026.2 platform.
+- Made Sign In open the web dialog directly and reliably capture `.com` or `.cn` sessions.
+- Removed false page-load warnings caused by cancelled requests and embedded frames.
+- Fixed inline mathematical notation in imported study-list content.
 
 ### Removed
 
-- Removed inherited Sentry error reporting, Baidu analytics requests, and the generated device identifier.
-- Removed the custom updater tied to the upstream Marketplace listing.
-- Removed the inherited donation entry and personal-site links.
-- Removed account/password fields and legacy direct-login code.
-- Removed the GPL-licensed `lc-sdk` dependency and its unsafe TLS implementation.
-- Removed the unused GPL-licensed JLaTeXMath dependency.
+- Removed inherited Sentry error reporting, Baidu analytics, and persistent device identification.
+- Removed the legacy account/password login, upstream-specific updater, donation entry, and personal-site links.
+- Removed obsolete dependencies and unsafe legacy networking behavior.
 
 ## 8.16.0
 

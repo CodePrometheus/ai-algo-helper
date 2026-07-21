@@ -14,7 +14,7 @@ import com.intellij.ui.content.Content;
 import com.codeprometheus.aialgohelper.plugin.model.PluginConstant;
 import com.codeprometheus.aialgohelper.plugin.setting.PersistentConfig;
 import com.codeprometheus.aialgohelper.plugin.utils.DataKeys;
-import icons.LeetCodeEditorIcons;
+import icons.AIAlgoHelperIcons;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.atomic.AtomicReference;
@@ -34,7 +34,7 @@ public class ConsoleWindowFactory implements ToolWindowFactory, DumbAware {
         Content content = toolWindow.getContentManager().getFactory().createContent(consolePanel, "", true);
         toolWindow.getContentManager().addContent(content);
         if (PersistentConfig.getInstance().getInitConfig() != null && !PersistentConfig.getInstance().getInitConfig().getShowToolIcon()) {
-            toolWindow.setIcon(LeetCodeEditorIcons.EMPEROR_NEW_CLOTHES);
+            toolWindow.setIcon(AIAlgoHelperIcons.EMPEROR_NEW_CLOTHES);
         }
     }
 

@@ -14,7 +14,7 @@ import com.codeprometheus.aialgohelper.plugin.model.PluginConstant;
 import com.codeprometheus.aialgohelper.plugin.model.Tag;
 import com.codeprometheus.aialgohelper.plugin.utils.DataKeys;
 import com.codeprometheus.aialgohelper.plugin.window.WindowFactory;
-import icons.LeetCodeEditorIcons;
+import icons.AIAlgoHelperIcons;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -40,7 +40,7 @@ public class FindActionGroup extends ActionGroup implements DumbAware {
         if (tags != null && !tags.isEmpty()) {
             for (Tag tag : tags) {
                 if (tag.isSelect()) {
-                    e.getPresentation().setIcon(LeetCodeEditorIcons.FILTER);
+                    e.getPresentation().setIcon(AIAlgoHelperIcons.FILTER);
                     return;
                 }
             }

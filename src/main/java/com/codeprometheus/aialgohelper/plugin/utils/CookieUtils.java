@@ -34,6 +34,7 @@ public class CookieUtils {
             jsonObject.put("value", basicClientCookie.getValue());
             jsonObject.put("domain", basicClientCookie.getDomain());
             jsonObject.put("path", basicClientCookie.getPath());
+            jsonObject.put("secure", basicClientCookie.getSecure());
             jsonArray.add(jsonObject);
         }
         return jsonArray.toJSONString();
@@ -65,7 +66,10 @@ public class CookieUtils {
             HttpCookie clientCookie = new HttpCookie(jsonObject.getString("name"), jsonObject.getString("value"));
             clientCookie.setDomain(jsonObject.getString("domain"));
             clientCookie.setPath(jsonObject.getString("path"));
-            clientCookie.setMaxAge(7 * 24 * 60);
+            Boolean secure = jsonObject.getBoolean("secure");
+            if (secure != null) {
+                clientCookie.setSecure(secure);
+            }
             cookieList.add(clientCookie);
         }
 

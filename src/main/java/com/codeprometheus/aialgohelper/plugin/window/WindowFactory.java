@@ -17,7 +17,7 @@ import com.codeprometheus.aialgohelper.plugin.manager.NavigatorAction;
 import com.codeprometheus.aialgohelper.plugin.model.PluginConstant;
 import com.codeprometheus.aialgohelper.plugin.setting.PersistentConfig;
 import com.codeprometheus.aialgohelper.plugin.utils.DataKeys;
-import icons.LeetCodeEditorIcons;
+import icons.AIAlgoHelperIcons;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,7 +40,7 @@ public class WindowFactory implements ToolWindowFactory, DumbAware {
         toolWindow.getContentManager().addContent(content);
         if (PersistentConfig.getInstance().getInitConfig() != null) {
             if (!PersistentConfig.getInstance().getInitConfig().getShowToolIcon()) {
-                toolWindow.setIcon(LeetCodeEditorIcons.EMPEROR_NEW_CLOTHES);
+                toolWindow.setIcon(AIAlgoHelperIcons.EMPEROR_NEW_CLOTHES);
             }
             if (!PersistentConfig.getInstance().getInitConfig().isLeftQuestionEditor()) {
                 toolWindow.setAnchor(ToolWindowAnchor.RIGHT, null);

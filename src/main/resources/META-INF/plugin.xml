@@ -2,7 +2,7 @@
     <id>com.codeprometheus.aialgohelper</id>
     <name>AI Algo Helper</name>
     <version>1.0.0</version>
-    <vendor url="https://github.com/CodePrometheus/ai-algo-helper">CodePrometheus</vendor>
+    <vendor url="https://github.com/CodePrometheus">Zixin Zhou · GitHub@CodePrometheus</vendor>
 
     <description><![CDATA[]]></description>
 
@@ -25,9 +25,9 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <postStartupActivity  implementation = "com.codeprometheus.aialgohelper.plugin.listener.RegisterPluginInstallerStateListener"/>
-        <toolWindow id="AI Algo Helper" secondary="false" icon="LeetCodeEditorIcons.LEETCODE_TOOL_WINDOW" anchor="left"
+        <toolWindow id="AI Algo Helper" secondary="false" icon="AIAlgoHelperIcons.TOOL_WINDOW" anchor="left"
                     factoryClass="com.codeprometheus.aialgohelper.plugin.window.WindowFactory" />
-        <toolWindow id="AI Algo Helper Console" secondary="false" icon="LeetCodeEditorIcons.LEETCODE_TOOL_WINDOW" anchor="bottom"
+        <toolWindow id="AI Algo Helper Console" secondary="false" icon="AIAlgoHelperIcons.TOOL_WINDOW" anchor="bottom"
                     factoryClass="com.codeprometheus.aialgohelper.plugin.window.ConsoleWindowFactory" />
         <applicationService serviceInterface="com.codeprometheus.aialgohelper.plugin.setting.PersistentConfig"
                             serviceImplementation="com.codeprometheus.aialgohelper.plugin.setting.PersistentConfig"/>
@@ -67,72 +67,72 @@
 
     <actions>
         <action id="aiAlgoHelper.LoginAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.LoginAction"
-                text="Sign in" description="Sign in" icon="LeetCodeEditorIcons.LOGIN">
+                text="Sign in" description="Sign in" icon="AIAlgoHelperIcons.LOGIN">
         </action>
         <action id="aiAlgoHelper.LogoutAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.LogoutAction"
-                text="Sign out" description="Sign out" icon="LeetCodeEditorIcons.LOGOUT">
+                text="Sign out" description="Sign out" icon="AIAlgoHelperIcons.LOGOUT">
         </action>
         <action id="aiAlgoHelper.RefreshAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.RefreshAction"
-                text="Refresh question" description="Refreshquestion" icon="LeetCodeEditorIcons.REFRESH">
+                text="Refresh question" description="Refreshquestion" icon="AIAlgoHelperIcons.REFRESH">
         </action>
         <action id="aiAlgoHelper.FindAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindAction"
-                text="Find question" description="Refreshquestion" icon="LeetCodeEditorIcons.FIND">
+                text="Find question" description="Refreshquestion" icon="AIAlgoHelperIcons.FIND">
         </action>
         <action id="aiAlgoHelper.ProgressAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.ProgressAction"
-                text="Progress" description="Progress" icon="LeetCodeEditorIcons.PROGRESS">
+                text="Progress" description="Progress" icon="AIAlgoHelperIcons.PROGRESS">
         </action>
 
         <action id="aiAlgoHelper.ConfigAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.ConfigAction"
-                text="Settings" description="Settings" icon="LeetCodeEditorIcons.CONFIG">
+                text="Settings" description="Settings" icon="AIAlgoHelperIcons.CONFIG">
         </action>
         <action id="aiAlgoHelper.ClearAllAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.ClearAllAction"
-                text="Clear cache" description="Clear cache" icon="LeetCodeEditorIcons.CLEAR">
+                text="Clear cache" description="Clear cache" icon="AIAlgoHelperIcons.CLEAR">
         </action>
 
         <action id="aiAlgoHelper.HelpAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.HelpAction"
-                text="Help" description="Help" icon="LeetCodeEditorIcons.HELP">
+                text="Help" description="Help" icon="AIAlgoHelperIcons.HELP">
         </action>
 
         <action id="aiAlgoHelper.ToggleListAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.ToggleListAction"
-                text="Toggle List" description="Toggle List" icon="LeetCodeEditorIcons.TOGGLE">
+                text="Toggle List" description="Toggle List" icon="AIAlgoHelperIcons.TOGGLE">
         </action>
 
         <action id="aiAlgoHelper.OpenAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.OpenAction"
-                text="open question" description="open question" icon="LeetCodeEditorIcons.QUESTION">
+                text="open question" description="open question" icon="AIAlgoHelperIcons.QUESTION">
         </action>
 
         <action id="aiAlgoHelper.OpenContentAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.OpenContentAction"
-                text="open content" description="open content" icon="LeetCodeEditorIcons.DESC">
+                text="open content" description="open content" icon="AIAlgoHelperIcons.DESC">
         </action>
         <action id="aiAlgoHelper.OpenSolutionAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.OpenSolutionAction"
-                text="open solution" description="open solution" icon="LeetCodeEditorIcons.SOLUTION">
+                text="open solution" description="open solution" icon="AIAlgoHelperIcons.SOLUTION">
         </action>
 
         <action id="aiAlgoHelper.OpenInWebAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.OpenInWebAction"
-                text="open in web" description="open in web" icon="LeetCodeEditorIcons.POPUP">
+                text="open in web" description="open in web" icon="AIAlgoHelperIcons.POPUP">
         </action>
 
         <action id="aiAlgoHelper.SubmitAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.SubmitAction"
-                text="Submit" description="Submit" icon="LeetCodeEditorIcons.SUBMIT">
+                text="Submit" description="Submit" icon="AIAlgoHelperIcons.SUBMIT">
         </action>
         <action id="aiAlgoHelper.SubmissionsAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.SubmissionsAction"
-                text="Submissions" description="Submissions" icon="LeetCodeEditorIcons.HISTORY">
+                text="Submissions" description="Submissions" icon="AIAlgoHelperIcons.HISTORY">
         </action>
         <action id="aiAlgoHelper.RunCodeAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.RunCodeAction"
-                text="Run Code" description="Run Code" icon="LeetCodeEditorIcons.RUN">
+                text="Run Code" description="Run Code" icon="AIAlgoHelperIcons.RUN">
         </action>
         <action id="aiAlgoHelper.TestcaseAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.TestcaseAction"
-                text="Testcase" description="Test case" icon="LeetCodeEditorIcons.EDIT_DOC">
+                text="Testcase" description="Test case" icon="AIAlgoHelperIcons.EDIT_DOC">
         </action>
         <action id="aiAlgoHelper.ClearOneAction" class="com.codeprometheus.aialgohelper.plugin.actions.tree.ClearOneAction"
-                text="Clear cache" description="Clear cache" icon="LeetCodeEditorIcons.CLEAR">
+                text="Clear cache" description="Clear cache" icon="AIAlgoHelperIcons.CLEAR">
         </action>
 
         <action id="aiAlgoHelper.PickAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.PickAction"
-                text="Pick one" description="Pick one" icon="LeetCodeEditorIcons.RANDOM">
+                text="Pick one" description="Pick one" icon="AIAlgoHelperIcons.RANDOM">
         </action>
         <action id="aiAlgoHelper.positionAction" class="com.codeprometheus.aialgohelper.plugin.actions.editor.PositionAction"
-                text="position" description="position" icon="LeetCodeEditorIcons.POSITION"/>
+                text="position" description="position" icon="AIAlgoHelperIcons.POSITION"/>
 
         <group id="aiAlgoHelper.NavigatorActionsToolbar">
             <reference id="aiAlgoHelper.LoginAction"/>
@@ -163,22 +163,22 @@
             <reference id="aiAlgoHelper.TestcaseAction"/>
             <separator/>
             <group id="aiAlgoHelper.FavoriteGroup" class="com.codeprometheus.aialgohelper.plugin.actions.tree.FavoriteActionGroup"
-                   popup="true" text="Favorite" description="Favorite" icon="LeetCodeEditorIcons.FAVORITE">
+                   popup="true" text="Favorite" description="Favorite" icon="AIAlgoHelperIcons.FAVORITE">
             </group>
-            <group id="aiAlgoHelper.note" popup="true" text="note" description="note" icon="LeetCodeEditorIcons.NOTE">
+            <group id="aiAlgoHelper.note" popup="true" text="note" description="note" icon="AIAlgoHelperIcons.NOTE">
                 <action id="aiAlgoHelper.ShowNote"
                         class="com.codeprometheus.aialgohelper.plugin.actions.tree.ShowNoteAction"
-                        text="ShowNote" description="Show Note" icon="LeetCodeEditorIcons.SHOW">
+                        text="ShowNote" description="Show Note" icon="AIAlgoHelperIcons.SHOW">
                 </action>
                 <action id="aiAlgoHelper.PullNote" class="com.codeprometheus.aialgohelper.plugin.actions.tree.PullNoteAction"
-                        text="PullNote" description="Pull Note" icon="LeetCodeEditorIcons.PULL">
+                        text="PullNote" description="Pull Note" icon="AIAlgoHelperIcons.PULL">
                 </action>
                 <action id="aiAlgoHelper.PushNote" class="com.codeprometheus.aialgohelper.plugin.actions.tree.PushNoteAction"
-                        text="PushNote" description="Push Note" icon="LeetCodeEditorIcons.PUSH">
+                        text="PushNote" description="Push Note" icon="AIAlgoHelperIcons.PUSH">
                 </action>
             </group>
             <separator/>
-            <group id="aiAlgoHelper.timer" popup="true" text="Timer" description="timer" icon="LeetCodeEditorIcons.TIME">
+            <group id="aiAlgoHelper.timer" popup="true" text="Timer" description="timer" icon="AIAlgoHelperIcons.TIME">
                 <action id="aiAlgoHelper.StartTimeAction"
                         class="com.codeprometheus.aialgohelper.plugin.actions.tree.StartTimeAction"
                         text="Start" description="Start Time">
@@ -212,53 +212,53 @@
             </group>
             <separator/>
             <action id="aiAlgoHelper.find.Clear" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindClearAction"
-                    text="Clear find" description="Clear find " icon="LeetCodeEditorIcons.CLEAN">
+                    text="Clear find" description="Clear find " icon="AIAlgoHelperIcons.CLEAN">
             </action>
         </group>
 
         <group id="aiAlgoHelper.editor.group">
             <action id="aiAlgoHelper.editor.RunCodeAction" class="com.codeprometheus.aialgohelper.plugin.actions.editor.RunCodeAction"
-                    text="Run Code" description="Run Code(editor)" icon="LeetCodeEditorIcons.RUN">
+                    text="Run Code" description="Run Code(editor)" icon="AIAlgoHelperIcons.RUN">
             </action>
             <action id="aiAlgoHelper.editor.TestcaseAction"
                     class="com.codeprometheus.aialgohelper.plugin.actions.editor.TestcaseAction"
-                    text="Testcase" description="Test case(editor)" icon="LeetCodeEditorIcons.EDIT_DOC">
+                    text="Testcase" description="Test case(editor)" icon="AIAlgoHelperIcons.EDIT_DOC">
             </action>
             <separator/>
             <action id="aiAlgoHelper.editor.SubmitAction" class="com.codeprometheus.aialgohelper.plugin.actions.editor.SubmitAction"
-                    text="Submit" description="Submit(editor)" icon="LeetCodeEditorIcons.SUBMIT">
+                    text="Submit" description="Submit(editor)" icon="AIAlgoHelperIcons.SUBMIT">
             </action>
             <action id="aiAlgoHelper.editor.SubmissionsAction"
                     class="com.codeprometheus.aialgohelper.plugin.actions.editor.SubmissionsAction"
-                    text="Submissions" description="Submissions(editor)" icon="LeetCodeEditorIcons.HISTORY">
+                    text="Submissions" description="Submissions(editor)" icon="AIAlgoHelperIcons.HISTORY">
             </action>
             <separator/>
             <action id="aiAlgoHelper.editor.OpenContentAction"
                     class="com.codeprometheus.aialgohelper.plugin.actions.editor.OpenContentAction"
-                    text="open content" description="open content(editor)" icon="LeetCodeEditorIcons.DESC">
+                    text="open content" description="open content(editor)" icon="AIAlgoHelperIcons.DESC">
             </action>
             <action id="aiAlgoHelper.editor.OpenSolutionAction" class="com.codeprometheus.aialgohelper.plugin.actions.editor.OpenSolutionAction"
-                    text="open solution" description="open solution" icon="LeetCodeEditorIcons.SOLUTION">
+                    text="open solution" description="open solution" icon="AIAlgoHelperIcons.SOLUTION">
             </action>
             <action id="aiAlgoHelper.editor.OpenInWebAction"
                     class="com.codeprometheus.aialgohelper.plugin.actions.editor.OpenInWebAction"
-                    text="open in web" description="open in web(editor)" icon="LeetCodeEditorIcons.POPUP">
+                    text="open in web" description="open in web(editor)" icon="AIAlgoHelperIcons.POPUP">
             </action>
             <separator/>
             <reference id="aiAlgoHelper.positionAction"/>
-            <group id="aiAlgoHelper.editor.note" popup="true" text="note" description="note" icon="LeetCodeEditorIcons.NOTE">
+            <group id="aiAlgoHelper.editor.note" popup="true" text="note" description="note" icon="AIAlgoHelperIcons.NOTE">
                 <action id="aiAlgoHelper.editor.ShowNote"
                         class="com.codeprometheus.aialgohelper.plugin.actions.editor.ShowNoteAction"
-                        text="ShowNote" description="Show Note" icon="LeetCodeEditorIcons.SHOW">
+                        text="ShowNote" description="Show Note" icon="AIAlgoHelperIcons.SHOW">
                 </action>
                 <action id="aiAlgoHelper.editor.PullNote" class="com.codeprometheus.aialgohelper.plugin.actions.editor.PullNoteAction"
-                        text="PullNote" description="Pull Note" icon="LeetCodeEditorIcons.PULL">
+                        text="PullNote" description="Pull Note" icon="AIAlgoHelperIcons.PULL">
                 </action>
                 <action id="aiAlgoHelper.editor.PushNote" class="com.codeprometheus.aialgohelper.plugin.actions.editor.PushNoteAction"
-                        text="PushNote" description="Push Note" icon="LeetCodeEditorIcons.PUSH">
+                        text="PushNote" description="Push Note" icon="AIAlgoHelperIcons.PUSH">
                 </action>
             </group>
-            <group id="aiAlgoHelper.editor.timer" popup="true" text="Timer" description="timer(editor)" icon="LeetCodeEditorIcons.TIME">
+            <group id="aiAlgoHelper.editor.timer" popup="true" text="Timer" description="timer(editor)" icon="AIAlgoHelperIcons.TIME">
                 <action id="aiAlgoHelper.editor.StartTimeAction"
                         class="com.codeprometheus.aialgohelper.plugin.actions.editor.StartTimeAction"
                         text="Start" description="Start Time(editor)">
@@ -273,7 +273,7 @@
         </group>
 
         <group id="aiAlgoHelper.editor.menu" class="com.codeprometheus.aialgohelper.plugin.actions.editor.EditorMenuActionGroup"
-               text="AI Algo Helper menu" popup="true" icon="LeetCodeEditorIcons.LEETCODE_TOOL_WINDOW">
+               text="AI Algo Helper menu" popup="true" icon="AIAlgoHelperIcons.TOOL_WINDOW">
             <reference id="aiAlgoHelper.editor.group"/>
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </group>
@@ -284,22 +284,22 @@
                     text="Sort:" description="label"/>
             <separator/>
             <action id="aiAlgoHelper.sort.SortByTitle" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
-                    text="Title" description="Sort By Title" icon="LeetCodeEditorIcons.SORT_ASC"/>
+                    text="Title" description="Sort By Title" icon="AIAlgoHelperIcons.SORT_ASC"/>
 
             <action id="aiAlgoHelper.sort.SortBySolution" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
-                    text="Solution" description="Sort By Solution" icon="LeetCodeEditorIcons.SORT_ASC"/>
+                    text="Solution" description="Sort By Solution" icon="AIAlgoHelperIcons.SORT_ASC"/>
 
             <action id="aiAlgoHelper.sort.SortByAcceptance"
                     class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
-                    text="Acceptance" description="Sort By Acceptance" icon="LeetCodeEditorIcons.SORT_ASC"/>
+                    text="Acceptance" description="Sort By Acceptance" icon="AIAlgoHelperIcons.SORT_ASC"/>
 
             <action id="aiAlgoHelper.sort.SortByDifficulty"
                     class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
-                    text="Difficulty" description="Sort By Difficulty" icon="LeetCodeEditorIcons.SORT_ASC"/>
+                    text="Difficulty" description="Sort By Difficulty" icon="AIAlgoHelperIcons.SORT_ASC"/>
 
             <action id="aiAlgoHelper.sort.SortByFrequency"
                     class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
-                    text="Frequency" description="Sort By Frequency" icon="LeetCodeEditorIcons.SORT_ASC"/>
+                    text="Frequency" description="Sort By Frequency" icon="AIAlgoHelperIcons.SORT_ASC"/>
         </group>
 
         <action id="aiAlgoHelper.PageSize" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.page.PageSizeBoxAction"
@@ -323,13 +323,13 @@
             <reference id="aiAlgoHelper.LogoutAction"/>
             <separator/>
             <action id="aiAlgoHelper.codetop.RefreshAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.RefreshAction"
-                    text="Refresh question" description="Refreshquestion" icon="LeetCodeEditorIcons.REFRESH">
+                    text="Refresh question" description="Refreshquestion" icon="AIAlgoHelperIcons.REFRESH">
             </action>
             <action id="aiAlgoHelper.codetop.FindAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindAction"
-                    text="Find question" description="Refreshquestion" icon="LeetCodeEditorIcons.FIND">
+                    text="Find question" description="Refreshquestion" icon="AIAlgoHelperIcons.FIND">
             </action>
             <action id="aiAlgoHelper.codetop.ShareAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.ShareAction"
-                    text="Share" description="Share" icon="LeetCodeEditorIcons.SHARE">
+                    text="Share" description="Share" icon="AIAlgoHelperIcons.SHARE">
             </action>
             <separator/>
             <reference id="aiAlgoHelper.ToggleListAction"/>
@@ -350,7 +350,7 @@
             </group>
             <separator/>
             <action id="aiAlgoHelper.codetop.find.Clear" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindClearAction"
-                    text="Clear find" description="Clear find " icon="LeetCodeEditorIcons.CLEAN">
+                    text="Clear find" description="Clear find " icon="AIAlgoHelperIcons.CLEAN">
             </action>
         </group>
 
@@ -360,13 +360,13 @@
                     text="Sort:" description="label"/>
             <separator/>
             <action id="aiAlgoHelper.codetop.sort.CodeTopSortByTitle" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
-                    text="Title" description="Sort By Title" icon="LeetCodeEditorIcons.SORT_ASC"/>
+                    text="Title" description="Sort By Title" icon="AIAlgoHelperIcons.SORT_ASC"/>
 
             <action id="aiAlgoHelper.codetop.sort.CodeTopSortByTime" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
-                    text="Time" description="Sort By Time" icon="LeetCodeEditorIcons.SORT_ASC"/>
+                    text="Time" description="Sort By Time" icon="AIAlgoHelperIcons.SORT_ASC"/>
 
             <action id="aiAlgoHelper.codetop.sort.CodeTopSortByFrequency" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
-                    text="Frequency" description="Sort By Frequency" icon="LeetCodeEditorIcons.SORT_ASC"/>
+                    text="Frequency" description="Sort By Frequency" icon="AIAlgoHelperIcons.SORT_ASC"/>
         </group>
 
         <group id="aiAlgoHelper.all.find.Toolbar" popup="true" text="Status" description="Status">
@@ -387,7 +387,7 @@
             </group>
             <separator/>
             <action id="aiAlgoHelper.all.find.Clear" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.FindClearAction"
-                    text="Clear find" description="Clear find " icon="LeetCodeEditorIcons.CLEAN">
+                    text="Clear find" description="Clear find " icon="AIAlgoHelperIcons.CLEAN">
             </action>
         </group>
 
@@ -397,15 +397,15 @@
                     text="Sort:" description="label"/>
             <separator/>
             <action id="aiAlgoHelper.all.sort.SortByTitle" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
-                    text="Title" description="Sort By Title" icon="LeetCodeEditorIcons.SORT_ASC"/>
+                    text="Title" description="Sort By Title" icon="AIAlgoHelperIcons.SORT_ASC"/>
 
             <action id="aiAlgoHelper.all.sort.SortByDifficulty"
                     class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
-                    text="Difficulty" description="Sort By Difficulty" icon="LeetCodeEditorIcons.SORT_ASC"/>
+                    text="Difficulty" description="Sort By Difficulty" icon="AIAlgoHelperIcons.SORT_ASC"/>
 
             <action id="aiAlgoHelper.all.sort.SortByStates"
                     class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.SortAction"
-                    text="States" description="Sort By States" icon="LeetCodeEditorIcons.SORT_ASC"/>
+                    text="States" description="Sort By States" icon="AIAlgoHelperIcons.SORT_ASC"/>
         </group>
 
     </actions>
