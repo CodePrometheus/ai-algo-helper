@@ -5,14 +5,10 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.DumbAware;
 import com.codeprometheus.aialgohelper.plugin.actions.AbstractAction;
 import com.codeprometheus.aialgohelper.plugin.listener.LoginNotifier;
-import com.codeprometheus.aialgohelper.plugin.manager.NavigatorAction;
 import com.codeprometheus.aialgohelper.plugin.model.Config;
-import com.codeprometheus.aialgohelper.plugin.model.HttpRequest;
-import com.codeprometheus.aialgohelper.plugin.setting.PersistentConfig;
+import com.codeprometheus.aialgohelper.plugin.setting.SessionCookieStore;
 import com.codeprometheus.aialgohelper.plugin.utils.*;
 import com.codeprometheus.aialgohelper.plugin.window.NavigatorTabsPanel;
-import com.codeprometheus.aialgohelper.plugin.window.WindowFactory;
-import com.codeprometheus.aialgohelper.plugin.window.login.HttpLogin;
 import com.codeprometheus.aialgohelper.plugin.window.login.LoginPanel;
 import org.apache.commons.lang3.StringUtils;
 
@@ -25,55 +21,39 @@ import java.util.List;
 public class LoginAction extends AbstractAction implements DumbAware {
 
     @Override
+    protected boolean requiresConfiguration() {
+        return false;
+    }
+
+    @Override
     public synchronized void actionPerformed(AnActionEvent anActionEvent, Config config) {
-
-        NavigatorAction navigatorAction = WindowFactory.getDataContext(anActionEvent.getProject()).getData(DataKeys.LEETCODE_PROJECTS_NAVIGATORACTION);
-
-        if (StringUtils.isBlank(HttpRequestUtils.getToken())) {
-            HttpResponse response = HttpRequest.builderGet(URLUtils.getLeetcodeVerify()).request();
-            if (response.getStatusCode() != 200) {
-                MessageUtils.getInstance(anActionEvent.getProject()).showWarnMsg("warning", PropertiesUtils.getInfo("request.failed"));
-                return;
-            }
-        } else {
-            if (HttpRequestUtils.isLogin(anActionEvent.getProject())) {
-                MessageUtils.getInstance(anActionEvent.getProject()).showWarnMsg("info", PropertiesUtils.getInfo("login.exist"));
-                NavigatorTabsPanel.loadUser(true);
-                if (navigatorAction.getPageInfo().getRowTotal() == 0) {
-                    ApplicationManager.getApplication().getMessageBus().syncPublisher(LoginNotifier.TOPIC).login(anActionEvent.getProject(), config.getUrl());
-                }
-                return;
-            }
-        }
-
-        if (StringUtils.isBlank(config.getLoginName())) {
-            MessageUtils.getInstance(anActionEvent.getProject()).showWarnMsg("info", PropertiesUtils.getInfo("config.user"));
+        String host = URLUtils.getLeetcodeHost();
+        if (StringUtils.isNotBlank(HttpRequestUtils.getToken()) && HttpRequestUtils.isLogin(anActionEvent.getProject())) {
+            MessageUtils.getInstance(anActionEvent.getProject()).showWarnMsg("info", PropertiesUtils.getInfo("login.exist"));
+            NavigatorTabsPanel.loadUser(true);
+            ApplicationManager.getApplication().getMessageBus().syncPublisher(LoginNotifier.TOPIC).login(anActionEvent.getProject(), host);
             return;
         }
 
-        if (StringUtils.isNotBlank(config.getCookie(config.getUrl() + config.getLoginName()))) {
-            List<HttpCookie> cookieList = CookieUtils.toHttpCookie(config.getCookie(config.getUrl() + config.getLoginName()));
-            HttpRequestUtils.setCookie(cookieList);
-            if (HttpRequestUtils.isLogin(anActionEvent.getProject())) {
-                MessageUtils.getInstance(anActionEvent.getProject()).showInfoMsg("login", PropertiesUtils.getInfo("login.success"));
-                NavigatorTabsPanel.loadUser(true);
-                ApplicationManager.getApplication().getMessageBus().syncPublisher(LoginNotifier.TOPIC).login(anActionEvent.getProject(), config.getUrl());
-                return;
-            } else {
-                config.addCookie(config.getUrl() + config.getLoginName(), null);
-                PersistentConfig.getInstance().setInitConfig(config);
+        String sessionCookies = SessionCookieStore.load(host);
+        if (StringUtils.isNotBlank(sessionCookies)) {
+            try {
+                List<HttpCookie> cookieList = CookieUtils.toHttpCookie(sessionCookies);
+                HttpRequestUtils.setCookie(cookieList);
+                if (HttpRequestUtils.isLogin(anActionEvent.getProject())) {
+                    MessageUtils.getInstance(anActionEvent.getProject()).showInfoMsg("login", PropertiesUtils.getInfo("login.success"));
+                    NavigatorTabsPanel.loadUser(true);
+                    ApplicationManager.getApplication().getMessageBus().syncPublisher(LoginNotifier.TOPIC).login(anActionEvent.getProject(), host);
+                    return;
+                }
+            } catch (RuntimeException exception) {
+                LogUtils.LOG.warn("Failed to restore the saved web session", exception);
             }
+            HttpRequestUtils.resetHttpclient();
+            SessionCookieStore.clear(host);
         }
 
-        if (!HttpLogin.ajaxLogin(config, navigatorAction, anActionEvent.getProject())) {
-            ApplicationManager.getApplication().invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    LoginPanel loginPanel = new LoginPanel(anActionEvent.getProject());
-                    loginPanel.show();
-                }
-            });
-        }
+        ApplicationManager.getApplication().invokeLater(() -> new LoginPanel(anActionEvent.getProject()).show());
 
     }
 

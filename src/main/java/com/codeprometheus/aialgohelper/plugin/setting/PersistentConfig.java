@@ -1,8 +1,6 @@
 package com.codeprometheus.aialgohelper.plugin.setting;
 
-import com.intellij.credentialStore.CredentialAttributes;
-import com.intellij.credentialStore.Credentials;
-import com.intellij.ide.passwordSafe.PasswordSafe;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.*;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.codeprometheus.aialgohelper.plugin.model.Config;
@@ -11,13 +9,11 @@ import com.codeprometheus.aialgohelper.plugin.model.PluginConstant;
 import com.codeprometheus.aialgohelper.plugin.utils.MessageUtils;
 import com.codeprometheus.aialgohelper.plugin.utils.PropertiesUtils;
 import com.codeprometheus.aialgohelper.plugin.utils.URLUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -32,9 +28,8 @@ public class PersistentConfig implements PersistentStateComponent<PersistentConf
 
     private Map<String, Config> initConfig = new HashMap<>();
 
-
     public static PersistentConfig getInstance() {
-        return ServiceManager.getService(PersistentConfig.class);
+        return ApplicationManager.getApplication().getService(PersistentConfig.class);
     }
 
     @Nullable
@@ -55,14 +50,6 @@ public class PersistentConfig implements PersistentStateComponent<PersistentConf
         if (config != null && config.getVersion() != null && config.getVersion() < Constant.PLUGIN_CONFIG_VERSION_3) {
             if (URLUtils.leetcodecnOld.equals(config.getUrl())) {
                 config.setUrl(URLUtils.leetcodecn);
-            }
-            Iterator<String> iterator = config.getUserCookie().keySet().iterator();
-            while (iterator.hasNext()) {
-                String key = iterator.next();
-                String value = config.getCookie(key);
-                if (StringUtils.isBlank(value) || key.startsWith(URLUtils.leetcodecnOld)) {
-                    iterator.remove();
-                }
             }
             config.setVersion(Constant.PLUGIN_CONFIG_VERSION_3);
             setInitConfig(config);
@@ -88,21 +75,6 @@ public class PersistentConfig implements PersistentStateComponent<PersistentConf
 
     public String getTempFilePath() {
         return getConfig().getFilePath() + File.separator + PATH + File.separator + initConfig.get(INITNAME).getAlias() + File.separator;
-    }
-
-    public void savePassword(String password, String username) {
-        if (username == null || password == null) {
-            return;
-        }
-        PasswordSafe.getInstance().set(new CredentialAttributes(PluginConstant.PLUGIN_ID, username, this.getClass()), new Credentials(username, password));
-    }
-
-    public String getPassword(String username) {
-        if (getConfig().getVersion() != null && username != null) {
-            return PasswordSafe.getInstance().getPassword(new CredentialAttributes(PluginConstant.PLUGIN_ID, username, this.getClass()));
-        }
-        return null;
-
     }
 
 }

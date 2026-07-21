@@ -1,6 +1,7 @@
 package com.codeprometheus.aialgohelper.plugin.editor;
 
 import com.google.common.net.UrlEscapers;
+import com.intellij.ide.ui.LafManagerListener;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
@@ -45,6 +46,11 @@ public class LCVPreview extends UserDataHolderBase implements FileEditor {
         myDocument = FileDocumentManager.getInstance().getDocument(myFile);
         MessageBusConnection settingsConnection = ApplicationManager.getApplication().getMessageBus().connect(this);
         settingsConnection.subscribe(EditorColorsManager.TOPIC, scheme -> {
+            if (myPanel != null) {
+                myPanel.updateStyle();
+            }
+        });
+        settingsConnection.subscribe(LafManagerListener.TOPIC, manager -> {
             if (myPanel != null) {
                 myPanel.updateStyle();
             }

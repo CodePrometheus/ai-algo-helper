@@ -9,27 +9,18 @@ AI Algo Helper is an IntelliJ IDEA plugin for algorithm practice.
 
 > AI Algo Helper is an independent open-source project and is not affiliated with or endorsed by LeetCode.
 
-## What it does
+## Highlights
 
-- Browse and search LeetCode problems inside IntelliJ IDEA.
-- View problem descriptions, examples, and available solutions.
+- Complete the problem-solving workflow inside IntelliJ IDEA: browse, search, code, run, submit, and review submissions.
+- Learn systematically with 12 curated topic collections organized as collapsible chapter trees, including solved and attempted status markers.
+- Read problem descriptions, examples, and available solutions in an IDE-native interface that follows the active UI theme.
 - Generate local solution files from configurable templates.
-- Run and submit solutions without leaving the IDE.
-- Review submissions and track practice progress.
+- Sign in through the built-in web dialog without giving the plugin your LeetCode password.
+- Practice without analytics, telemetry, or persistent device tracking.
 
-## 8.17.0 — Fork baseline
+## Current release
 
-Version `8.17.0` is the first AI Algo Helper release line after forking upstream `8.16.0`.
-
-- Renamed the plugin, artifact, actions, settings, tool windows, and Java packages to **AI Algo Helper** and `com.codeprometheus.aialgohelper`.
-- Upgraded the development stack to IntelliJ IDEA `2026.2`, IntelliJ Platform Gradle Plugin `2.18.1`, Gradle `9.5.0`, Kotlin `2.4.10`, and JBR/JDK `25`.
-- Declared the modular JCEF dependency required by current IntelliJ IDEA versions.
-- Removed the obsolete Apache Commons Collections usage that caused startup failures.
-- Removed the inherited Sentry integration, Baidu analytics requests, generated device identifier, and custom updater tied to the upstream Marketplace listing.
-- Removed the GPL-licensed `lc-sdk` dependency and its unsafe TLS implementation.
-- Removed the unused GPL-licensed JLaTeXMath dependency.
-- Rebuilt HTTP access on JetBrains platform APIs with standard TLS verification, IDE proxy/PAC support, cookies, and bounded redirects.
-- Added local regression tests for GET requests, redirects with cookie/CSRF propagation, and POST bodies.
+The current version is `1.0.0`. See the [changelog](CHANGELOG.md) for the complete release notes.
 
 ## Compatibility
 
@@ -61,7 +52,8 @@ The packaged plugin is written to `build/distributions/`.
 - AI Algo Helper does not include analytics or telemetry.
 - It does not generate a persistent device tracking identifier.
 - Network requests to LeetCode are made only when the related plugin features are used.
-- Account credentials are stored through the JetBrains PasswordSafe integration.
+- The plugin does not collect or store a LeetCode username or password.
+- Web sign-in session cookies are stored through JetBrains PasswordSafe.
 - HTTPS uses normal certificate and hostname verification.
 
 ## Attribution and license

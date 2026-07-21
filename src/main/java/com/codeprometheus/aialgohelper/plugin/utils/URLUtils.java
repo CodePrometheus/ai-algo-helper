@@ -32,11 +32,11 @@ public class URLUtils {
     public static String getLeetcodeHost() {
         Config config = PersistentConfig.getInstance().getInitConfig();
         if (config == null) {
-            return leetcode;
+            return leetcodecn;
         }
         String host = config.getUrl();
         if (StringUtils.isBlank(host)) {
-            return leetcode;
+            return leetcodecn;
         }
         return host;
     }

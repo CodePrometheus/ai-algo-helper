@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.codeprometheus.aialgohelper</id>
     <name>AI Algo Helper</name>
-    <version>8.17.0</version>
+    <version>1.0.0</version>
     <vendor url="https://github.com/CodePrometheus/ai-algo-helper">CodePrometheus</vendor>
 
     <description><![CDATA[]]></description>
@@ -148,9 +148,6 @@
             <reference id="aiAlgoHelper.ConfigAction"/>
             <reference id="aiAlgoHelper.ClearAllAction"/>
             <reference id="aiAlgoHelper.HelpAction"/>
-            <action id="aiAlgoHelper.DonateAction" class="com.codeprometheus.aialgohelper.plugin.actions.toolbar.DonateAction"
-                    text="Donate" description="Donate" icon="LeetCodeEditorIcons.DONATE">
-            </action>
         </group>
 
         <group id="aiAlgoHelper.NavigatorActionsMenu">

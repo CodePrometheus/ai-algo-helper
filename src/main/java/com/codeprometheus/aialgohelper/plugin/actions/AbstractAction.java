@@ -21,7 +21,7 @@ public abstract class AbstractAction extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
         Config config = PersistentConfig.getInstance().getInitConfig();
-        if (config == null) {
+        if (config == null && requiresConfiguration()) {
             MessageUtils.getInstance(anActionEvent.getProject()).showWarnMsg("warning", PropertiesUtils.getInfo("config.first"));
             ShowSettingsUtil.getInstance().showSettingsDialog(anActionEvent.getProject(), PluginConstant.APPLICATION_CONFIGURABLE_DISPLAY_NAME);
             return;
@@ -39,6 +39,10 @@ public abstract class AbstractAction extends AnAction {
     @Override
     public @NotNull ActionUpdateThread getActionUpdateThread() {
         return  ActionUpdateThread.BGT;
+    }
+
+    protected boolean requiresConfiguration() {
+        return true;
     }
 
     public abstract void actionPerformed(AnActionEvent anActionEvent, Config config);

@@ -7,8 +7,6 @@ import com.codeprometheus.aialgohelper.plugin.utils.PropertiesUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author shuzijun
@@ -23,17 +21,6 @@ public class Config implements Cloneable {
      * 配置名称
      */
     private String name;
-
-    /**
-     * 用户名
-     */
-    private String loginName;
-
-    /**
-     * 密码
-     */
-    @Transient
-    private String password;
 
     /**
      * 临时文件路径
@@ -68,19 +55,9 @@ public class Config implements Cloneable {
      */
     private String customTemplate = Constant.CUSTOM_TEMPLATE;
     /**
-     * 用户cookie
-     */
-    private Map<String, String> userCookie = new HashMap<>();
-
-    /**
      * 题目颜色
      */
     private String levelColour = Constant.LEVEL_COLOUR;
-
-    /**
-     * 使用cookie登录
-     */
-    private boolean cookie = false;
 
     /**
      * question Split Editor
@@ -128,14 +105,6 @@ public class Config implements Cloneable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getLoginName() {
-        return loginName;
-    }
-
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
     }
 
     public String getFilePath() {
@@ -210,31 +179,12 @@ public class Config implements Cloneable {
         this.customTemplate = customTemplate;
     }
 
-    public Map<String, String> getUserCookie() {
-        return userCookie;
-    }
-
-    public void setUserCookie(Map<String, String> userCookie) {
-        this.userCookie = userCookie;
-    }
-
     public String getAlias() {
         if ("leetcode.com".equals(getUrl())) {
             return "en";
         } else {
             return "cn";
         }
-    }
-
-    public void addCookie(String user, String cookie) {
-        userCookie.put(user, cookie);
-    }
-
-    public String getCookie(String user) {
-        if (userCookie == null) {
-            return null;
-        }
-        return userCookie.get(user);
     }
 
     public String getLevelColour() {
@@ -301,14 +251,6 @@ public class Config implements Cloneable {
 
     public void setEnglishContent(Boolean englishContent) {
         this.englishContent = englishContent;
-    }
-
-    public boolean isCookie() {
-        return cookie;
-    }
-
-    public void setCookie(boolean cookie) {
-        this.cookie = cookie;
     }
 
     @Transient
@@ -401,7 +343,6 @@ public class Config implements Cloneable {
 
         return new EqualsBuilder()
                 .append(showQuestionEditorSign, config.showQuestionEditorSign)
-                .append(loginName, config.loginName)
                 .append(filePath, config.filePath)
                 .append(codeType, config.codeType)
                 .append(url, config.url)
@@ -410,7 +351,6 @@ public class Config implements Cloneable {
                 .append(customFileName, config.customFileName)
                 .append(customTemplate, config.customTemplate)
                 .append(levelColour, config.levelColour)
-                .append(cookie, config.cookie)
                 .append(questionEditor, config.questionEditor)
                 .append(multilineComment, config.multilineComment)
                 .append(htmlContent, config.htmlContent)

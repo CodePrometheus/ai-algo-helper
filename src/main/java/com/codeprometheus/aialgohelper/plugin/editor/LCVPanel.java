@@ -1,15 +1,15 @@
 package com.codeprometheus.aialgohelper.plugin.editor;
 
 import com.intellij.ide.BrowserUtil;
+import com.intellij.ide.ui.LafManager;
+import com.intellij.ide.ui.laf.UIThemeLookAndFeelInfo;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
-import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
@@ -22,6 +22,7 @@ import com.intellij.util.Url;
 import com.intellij.util.Urls;
 import com.intellij.util.io.HttpRequests;
 import com.intellij.util.io.URLUtil;
+import com.intellij.util.ui.UIUtil;
 import com.codeprometheus.aialgohelper.plugin.model.PluginConstant;
 import com.codeprometheus.aialgohelper.plugin.utils.FileUtils;
 import com.codeprometheus.aialgohelper.plugin.utils.PropertiesUtils;
@@ -207,34 +208,26 @@ public class LCVPanel extends JCEFHtmlPanel {
     private String getStyle(boolean isTag) {
         try {
             EditorColorsScheme editorColorsScheme = EditorColorsManager.getInstance().getGlobalScheme();
-            Color defaultBackground = editorColorsScheme.getDefaultBackground();
+            Color background = UIUtil.getPanelBackground();
 
             Color scrollbarThumbColor = JBColor.namedColor(
                     "ScrollBar.thumbColor",
                     new JBColor(0xA6A6A6, 0x595959)
             );
-            TextAttributes textAttributes = editorColorsScheme.getAttributes(HighlighterColors.TEXT);
-            Color text = null;
-            if (textAttributes != null) {
-                text = textAttributes.getForegroundColor();
-            }
             String fontFamily = "font-family:\"" + editorColorsScheme.getEditorFontName() + "\",\"Helvetica Neue\",\"Luxi Sans\",\"DejaVu Sans\"," +
                     "\"Hiragino Sans GB\",\"Microsoft Yahei\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Noto Color Emoji\",\"Segoe UI Symbol\"," +
                     "\"Android Emoji\",\"EmojiSymbols\";";
             StringBuilder sb = new StringBuilder(isTag ? "<style id=\"ideaStyle\">" : "");
-            sb.append(isDarkTheme() ? ".vditor--dark" : ".vditor").append("{--panel-background-color:").append(toHexColor(defaultBackground))
-                    .append(";--textarea-background-color:").append(toHexColor(defaultBackground)).append(";");
-            sb.append("--toolbar-background-color:").append(toHexColor(JBColor.background())).append(";");
+            sb.append(isDarkTheme() ? ".vditor--dark" : ".vditor").append("{--panel-background-color:").append(toHexColor(background))
+                    .append(";--textarea-background-color:").append(toHexColor(background)).append(";");
+            sb.append("--toolbar-background-color:").append(toHexColor(background)).append(";");
             sb.append("}");
-            sb.append("::-webkit-scrollbar-track {background-color:").append(toHexColor(defaultBackground)).append(";}");
+            sb.append("::-webkit-scrollbar-track {background-color:").append(toHexColor(background)).append(";}");
             sb.append("::-webkit-scrollbar-thumb {background-color:").append(toHexColor(scrollbarThumbColor)).append(";}");
             sb.append(".vditor-reset {font-size:").append(editorColorsScheme.getEditorFontSize()).append("px;");
             sb.append(fontFamily);
-            if (text != null) {
-                sb.append("color:").append(toHexColor(text)).append(";");
-            }
             sb.append("}");
-            sb.append(" body{background-color: ").append(toHexColor(defaultBackground)).append(";}");
+            sb.append(" body{background-color: ").append(toHexColor(background)).append(";}");
             sb.append(isTag ? "</style>" : "");
             return sb.toString();
         } catch (Exception e) {
@@ -258,6 +251,7 @@ public class LCVPanel extends JCEFHtmlPanel {
     }
 
     private static boolean isDarkTheme() {
-        return !JBColor.isBright();
+        UIThemeLookAndFeelInfo theme = LafManager.getInstance().getCurrentUIThemeLookAndFeel();
+        return theme != null ? theme.isDark() : !JBColor.isBright();
     }
 }

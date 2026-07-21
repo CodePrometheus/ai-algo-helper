@@ -2,16 +2,41 @@
 
 # AI Algo Helper Changelog
 
-## 8.17.0
+## 1.0.0
+
+### Added
+
+- Added a dedicated Study Lists view with all 12 collapsible topic collections from [灵茶山艾府's scientific practice index](https://leetcode.cn/discuss/post/RvFUtj/), preserving author and source attribution.
+- Added solved and attempted status markers to study-list problems by reusing the existing cached question status.
+- Added PasswordSafe-backed storage for web sign-in session cookies.
+- Added regression tests for login actions, study-list catalogs and parsing, GET requests, redirects with cookie/CSRF propagation, and POST bodies.
 
 ### Changed
 
-- Rebranded the fork as AI Algo Helper.
-- Upgraded the build to IntelliJ Platform 2026.2, Gradle 9.5.0, and JBR 25.
+- Rebranded the plugin, artifact, actions, settings, tool windows, and Java packages as AI Algo Helper and `com.codeprometheus.aialgohelper`.
+- Upgraded the development stack to IntelliJ IDEA 2026.2, IntelliJ Platform Gradle Plugin 2.18.1, Gradle 9.5.0, Kotlin 2.4.10, and JBR/JDK 25.
 - Added the required JCEF module dependency for modern IntelliJ IDEA versions.
-- Removed legacy upstream telemetry and error reporting.
-- Replaced the legacy HTTP stack and removed unused GPL-licensed dependencies.
+- Replaced legacy account/password login with the built-in web sign-in dialog and PasswordSafe-backed session storage.
+- Rebuilt HTTP access on JetBrains platform APIs with standard TLS verification, IDE proxy/PAC support, cookies, and bounded redirects.
+- Made the JCEF problem preview follow the active IntelliJ UI theme and refresh when the theme changes.
 - Updated CI and release workflows for the `main` branch and current toolchain.
+
+### Fixed
+
+- Removed obsolete Apache Commons Collections usage that caused startup failures.
+- Fixed Action updates and background-context access for the IntelliJ IDEA 2026.2 threading model.
+- Made Sign In open the web dialog directly instead of opening Settings first.
+- Normalized supported inline Markdown math in imported study-list content.
+- Fixed the packaged Marketplace description.
+
+### Removed
+
+- Removed inherited Sentry error reporting, Baidu analytics requests, and the generated device identifier.
+- Removed the custom updater tied to the upstream Marketplace listing.
+- Removed the inherited donation entry and personal-site links.
+- Removed account/password fields and legacy direct-login code.
+- Removed the GPL-licensed `lc-sdk` dependency and its unsafe TLS implementation.
+- Removed the unused GPL-licensed JLaTeXMath dependency.
 
 ## 8.16.0
 
@@ -248,13 +273,5 @@
 
 [badge:en-doc]: https://img.shields.io/badge/Docs-English%20Document-blue?logo=docs&style=flat-square
 [badge:zh-doc]: https://img.shields.io/badge/Docs-中文文档-blue?logo=docs&style=flat-square
-[badge:donate]: https://img.shields.io/badge/Docs-donate-ff69c4?logo=docs&style=flat-square
-[badge:donate-zh]: https://img.shields.io/badge/Docs-捐赠-ff69c4?logo=docs&style=flat-square
-[badge:referrals]: https://img.shields.io/badge/Docs-内推-ff69c4?logo=docs&style=flat-square
-
-
 [gh:en-doc]: https://github.com/shuzijun/leetcode-editor/blob/master/README.md
 [gh:zh-doc]: https://github.com/shuzijun/leetcode-editor/blob/master/README_ZH.md
-
-[shuzijun-donate]: https://shuzijun.cn/donate.html
-[shuzijun-referrals]: https://shuzijun.cn/referrals.html

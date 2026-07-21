@@ -38,7 +38,7 @@ public class HttpRequestUtils {
     private static Map<String, String> getHeader(String url) {
         URI uri = URI.create(url);
         Map<String, String> headers = new HashMap<>();
-        headers.put("User-Agent", "Mozilla/5.0 (compatible; AI Algo Helper/8.17.0)");
+        headers.put("User-Agent", "Mozilla/5.0 (compatible; AI Algo Helper/1.0.0)");
         headers.put("Accept", "*/*");
         headers.put("Accept-Language", Locale.getDefault().toLanguageTag());
         headers.put("Origin", uri.getScheme() + "://" + uri.getAuthority());

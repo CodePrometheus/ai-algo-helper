@@ -13,12 +13,9 @@ import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.ui.TextBrowseFolderListener;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.ui.components.JBPasswordField;
 import com.intellij.ui.components.JBScrollPane;
-import com.intellij.ui.components.JBTextField;
 import com.codeprometheus.aialgohelper.plugin.listener.ColorListener;
 import com.codeprometheus.aialgohelper.plugin.listener.ConfigNotifier;
-import com.codeprometheus.aialgohelper.plugin.listener.DonateListener;
 import com.codeprometheus.aialgohelper.plugin.model.CodeTypeEnum;
 import com.codeprometheus.aialgohelper.plugin.model.Config;
 import com.codeprometheus.aialgohelper.plugin.model.Constant;
@@ -42,8 +39,6 @@ public class SettingUI {
     private JComboBox<String> questionEditorBox;
     private JComboBox<String> webComboBox;
     private JComboBox<String> codeComboBox;
-    private JBTextField userNameField;
-    private JBPasswordField passwordField;
     private JLabel easyLabel;
     private JLabel mediumLabel;
     private JLabel hardLabel;
@@ -55,7 +50,6 @@ public class SettingUI {
     private JPanel codeFileName;
     private JPanel codeTemplate;
     private JPanel templateConstant;
-    private JCheckBox cookieCheckBox;
     private JCheckBox multilineCheckBox;
     private JCheckBox htmlContentCheckBox;
     private JCheckBox showTopicsCheckBox;
@@ -67,7 +61,6 @@ public class SettingUI {
     private Editor fileNameEditor = null;
     private Editor templateEditor = null;
     private Editor templateHelpEditor = null;
-
 
     public SettingUI() {
         initUI();
@@ -88,7 +81,6 @@ public class SettingUI {
         fileFolderBtn.addBrowseFolderListener(new TextBrowseFolderListener(FileChooserDescriptorFactory.createSingleFileOrFolderDescriptor()) {
         });
 
-        customCodeBox.addActionListener(new DonateListener(customCodeBox));
         templateConfigHelp.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -157,8 +149,6 @@ public class SettingUI {
 
         Config config = PersistentConfig.getInstance().getInitConfig();
         if (config != null) {
-            userNameField.setText(config.getLoginName());
-            passwordField.setText(PersistentConfig.getInstance().getPassword(config.getLoginName()));
             if (StringUtils.isNotBlank(config.getFilePath())) {
                 fileFolderBtn.setText(config.getFilePath());
             }
@@ -180,7 +170,6 @@ public class SettingUI {
             mediumLabel.setForeground(colors[1]);
             hardLabel.setForeground(colors[2]);
 
-            cookieCheckBox.setSelected(config.isCookie());
             if (config.getQuestionEditor().equals("true")) {
                 questionEditorBox.setSelectedItem("Left");
             } else if (config.getQuestionEditor().equals("false")) {
@@ -221,15 +210,7 @@ public class SettingUI {
         } else {
             Config currentState = new Config();
             process(currentState);
-            if (currentState.isModified(config)) {
-                if (passwordField.getText() != null && passwordField.getText().equals(PersistentConfig.getInstance().getPassword(config.getLoginName()))) {
-                    return false;
-                } else {
-                    return true;
-                }
-            } else {
-                return true;
-            }
+            return !currentState.isModified(config);
         }
     }
 
@@ -247,7 +228,6 @@ public class SettingUI {
             file.mkdirs();
         }
         PersistentConfig.getInstance().setInitConfig(config);
-        PersistentConfig.getInstance().savePassword(passwordField.getText(), config.getLoginName());
         Config finalOldConfig = oldConfig;
         Config finalConfig = config;
         ProgressManager.getInstance().run(new Task.Backgroundable(null, PluginConstant.PLUGIN_NAME + " Apply Config", false) {
@@ -262,16 +242,14 @@ public class SettingUI {
         if (config.getVersion() == null) {
             config.setVersion(Constant.PLUGIN_CONFIG_VERSION_3);
         }
-        config.setLoginName(userNameField.getText());
         config.setFilePath(fileFolderBtn.getText());
         config.setCodeType(codeComboBox.getSelectedItem().toString());
         config.setUrl(webComboBox.getSelectedItem().toString());
         config.setCustomCode(customCodeBox.isSelected());
-        config.setCustomFileName(fileNameEditor.getDocument().getText());
-        config.setCustomTemplate(templateEditor.getDocument().getText());
+        config.setCustomFileName(fileNameEditor.getDocument().getImmutableCharSequence().toString());
+        config.setCustomTemplate(templateEditor.getDocument().getImmutableCharSequence().toString());
         config.setFormatLevelColour(easyLabel.getForeground(), mediumLabel.getForeground(), hardLabel.getForeground());
         config.setEnglishContent(englishContentBox.isSelected());
-        config.setCookie(cookieCheckBox.isSelected());
         config.setQuestionEditor(questionEditorBox.getSelectedItem().toString());
         config.setMultilineComment(multilineCheckBox.isSelected());
         config.setHtmlContent(htmlContentCheckBox.isSelected());
@@ -300,4 +278,5 @@ public class SettingUI {
             this.templateHelpEditor = null;
         }
     }
+
 }

@@ -1,6 +1,7 @@
 package com.codeprometheus.aialgohelper.plugin.actions.editor;
 
 
+import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
@@ -56,5 +57,10 @@ public class PositionAction extends AbstractEditAction {
             });
         }
 
+    }
+
+    @Override
+    public @NotNull ActionUpdateThread getActionUpdateThread() {
+        return ActionUpdateThread.EDT;
     }
 }

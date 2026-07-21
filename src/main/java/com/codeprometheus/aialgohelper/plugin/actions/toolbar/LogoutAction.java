@@ -7,6 +7,7 @@ import com.codeprometheus.aialgohelper.plugin.actions.AbstractAction;
 import com.codeprometheus.aialgohelper.plugin.listener.LoginNotifier;
 import com.codeprometheus.aialgohelper.plugin.model.Config;
 import com.codeprometheus.aialgohelper.plugin.model.HttpRequest;
+import com.codeprometheus.aialgohelper.plugin.setting.SessionCookieStore;
 import com.codeprometheus.aialgohelper.plugin.utils.*;
 import com.codeprometheus.aialgohelper.plugin.window.NavigatorTabsPanel;
 
@@ -19,6 +20,7 @@ public class LogoutAction extends AbstractAction implements DumbAware {
 
         HttpResponse httpResponse = HttpRequest.builderGet(URLUtils.getLeetcodeLogout()).request();
         HttpRequestUtils.resetHttpclient();
+        SessionCookieStore.clear(config.getUrl());
         MessageUtils.getInstance(anActionEvent.getProject()).showInfoMsg("info", PropertiesUtils.getInfo("login.out"));
         NavigatorTabsPanel.loadUser(false);
         ApplicationManager.getApplication().getMessageBus().syncPublisher(LoginNotifier.TOPIC).logout(anActionEvent.getProject(), config.getUrl());

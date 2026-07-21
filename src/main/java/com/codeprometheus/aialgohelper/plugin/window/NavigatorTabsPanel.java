@@ -6,6 +6,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.wm.ToolWindow;
+import com.intellij.ui.components.JBTabbedPane;
 import com.intellij.ui.tabs.TabInfo;
 import com.intellij.ui.tabs.impl.JBTabsImpl;
 import com.intellij.util.messages.MessageBusConnection;
@@ -19,10 +20,12 @@ import com.codeprometheus.aialgohelper.plugin.setting.PersistentConfig;
 import com.codeprometheus.aialgohelper.plugin.setting.StatisticsData;
 import com.codeprometheus.aialgohelper.plugin.utils.DataKeys;
 import com.codeprometheus.aialgohelper.plugin.utils.LogUtils;
+import com.codeprometheus.aialgohelper.plugin.utils.PropertiesUtils;
 import com.codeprometheus.aialgohelper.plugin.utils.URLUtils;
 import com.codeprometheus.aialgohelper.plugin.window.navigator.AllNavigatorPanel;
 import com.codeprometheus.aialgohelper.plugin.window.navigator.NavigatorPanel;
 import com.codeprometheus.aialgohelper.plugin.window.navigator.TopNavigatorPanel;
+import com.codeprometheus.aialgohelper.plugin.window.study.StudyListsPanel;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -97,7 +100,10 @@ public class NavigatorTabsPanel extends SimpleToolWindowPanel implements Disposa
             }
         }
 
-        setContent(tabs);
+        JBTabbedPane mainTabs = new JBTabbedPane();
+        mainTabs.addTab(PropertiesUtils.getInfo("study.tab.questions"), tabs);
+        mainTabs.addTab(PropertiesUtils.getInfo("study.tab.lists"), new StudyListsPanel(project));
+        setContent(mainTabs);
 
         ApplicationManager.getApplication().executeOnPooledThread(() -> {
             User user = getUser();

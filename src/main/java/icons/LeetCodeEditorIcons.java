@@ -39,7 +39,6 @@ public interface LeetCodeEditorIcons {
     Icon SORT_DESC = IconLoader.getIcon("/icons/sortDesc.svg");
     Icon NOTE = IconLoader.getIcon("/icons/note.svg");
     Icon LCV = IconLoader.getIcon("/icons/lcv.svg");
-    Icon DONATE = IconLoader.getIcon("/icons/donate.svg");
     Icon SHARE = IconLoader.getIcon("/icons/share.svg");
     Icon TOGGLE = IconLoader.getIcon("/icons/toggle.svg");
     Icon SHOW = IconLoader.getIcon("/icons/show.svg");
