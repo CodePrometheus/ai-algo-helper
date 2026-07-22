@@ -75,15 +75,13 @@ public class ConvergeProvider implements AsyncFileEditorProvider, DumbAware {
 
     @NotNull
     public static Builder getBuilderFromEditorProvider(@NotNull final FileEditorProvider provider, @NotNull final Project project, @NotNull final VirtualFile file) {
-        if (provider instanceof AsyncFileEditorProvider) {
-            return ((AsyncFileEditorProvider) provider).createEditorAsync(project, file);
-        } else {
-            return new Builder() {
-                @Override
-                public FileEditor build() {
-                    return provider.createEditor(project, file);
-                }
-            };
-        }
+        // createEditorAsync is @ApiStatus.OverrideOnly, so delegate providers are always
+        // built through the regular synchronous factory.
+        return new Builder() {
+            @Override
+            public FileEditor build() {
+                return provider.createEditor(project, file);
+            }
+        };
     }
 }

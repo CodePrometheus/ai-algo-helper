@@ -11,12 +11,14 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import java.util.Date;
 
 /**
- * Provide static tool class, StringUtils document reference <a href="https://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/StringUtils.html">doc</a><br>
- * 提供的静态工具类，StringUtils文档参考<a href="https://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/StringUtils.html">doc</a>
+ * Static tool class exposed to code templates as $velocityTool / $vt.<br>
+ * 提供给代码模板的静态工具类（$velocityTool / $vt）。<br>
+ * Historically this class extended StringUtils; the commonly used string helpers are
+ * now exposed directly below so existing templates keep working.
  *
  * @author shuzijun
  */
-public class VelocityTool extends StringUtils {
+public class VelocityTool {
 
     private static String[] numsAry = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
 
@@ -50,10 +52,10 @@ public class VelocityTool extends StringUtils {
      */
     public static String camelCaseName(String underscoreName) {
 
-        if (isNotBlank(underscoreName)) {
+        if (StringUtils.isNotBlank(underscoreName)) {
             underscoreName = underscoreName.replace(" ", "_");
             StringBuilder result = new StringBuilder();
-            if (isNumeric(underscoreName.substring(0, 1))) {
+            if (StringUtils.isNumeric(underscoreName.substring(0, 1))) {
                 underscoreName = numsAry[Integer.valueOf(underscoreName.substring(0, 1))] + "-" + underscoreName.substring(1);
             }
             boolean first = true;
@@ -87,10 +89,10 @@ public class VelocityTool extends StringUtils {
      */
     public static String smallCamelCaseName(String underscoreName) {
 
-        if (isNotBlank(underscoreName)) {
+        if (StringUtils.isNotBlank(underscoreName)) {
             underscoreName = underscoreName.replace(" ", "_");
             StringBuilder result = new StringBuilder();
-            if (isNumeric(underscoreName.substring(0, 1))) {
+            if (StringUtils.isNumeric(underscoreName.substring(0, 1))) {
                 underscoreName = numsAry[Integer.valueOf(underscoreName.substring(0, 1))] + "-" + underscoreName.substring(1);
             }
             boolean first = false;
@@ -125,7 +127,7 @@ public class VelocityTool extends StringUtils {
 
     public static String snakeCaseName(String underscoreName) {
 
-        if (isNotBlank(underscoreName)) {
+        if (StringUtils.isNotBlank(underscoreName)) {
             underscoreName = underscoreName.replace(" ", "_");
             StringBuilder result = new StringBuilder();
             for (int i = 0, j = underscoreName.length(); i < j; i++) {
@@ -201,10 +203,10 @@ public class VelocityTool extends StringUtils {
      * @return
      */
     public static String toPinyinAndTrims(String str) {
-        if (isBlank(str)) {
+        if (StringUtils.isBlank(str)) {
             return "";
         }
-        str = replace(str, " ", "");
+        str = str.replace(" ", "");
         StringBuilder sb = new StringBuilder();
         for (char c : str.toCharArray()) {
             if (Pinyin.isChinese(c)) {
@@ -215,5 +217,220 @@ public class VelocityTool extends StringUtils {
             }
         }
         return sb.toString();
+    }
+
+    // ------------------------------------------------------------------
+    // String helpers kept for template compatibility. VelocityTool used to
+    // extend StringUtils, so custom templates may call these directly.
+    // ------------------------------------------------------------------
+
+    public static boolean isBlank(CharSequence cs) {
+        return StringUtils.isBlank(cs);
+    }
+
+    public static boolean isNotBlank(CharSequence cs) {
+        return StringUtils.isNotBlank(cs);
+    }
+
+    public static boolean isEmpty(CharSequence cs) {
+        return StringUtils.isEmpty(cs);
+    }
+
+    public static boolean isNotEmpty(CharSequence cs) {
+        return StringUtils.isNotEmpty(cs);
+    }
+
+    public static boolean isNumeric(CharSequence cs) {
+        return StringUtils.isNumeric(cs);
+    }
+
+    public static boolean isAlpha(CharSequence cs) {
+        return StringUtils.isAlpha(cs);
+    }
+
+    public static boolean isAlphanumeric(CharSequence cs) {
+        return StringUtils.isAlphanumeric(cs);
+    }
+
+    public static String upperCase(String str) {
+        return StringUtils.upperCase(str);
+    }
+
+    public static String lowerCase(String str) {
+        return StringUtils.lowerCase(str);
+    }
+
+    public static String capitalize(String str) {
+        return StringUtils.capitalize(str);
+    }
+
+    public static String uncapitalize(String str) {
+        return StringUtils.uncapitalize(str);
+    }
+
+    public static String swapCase(String str) {
+        return StringUtils.swapCase(str);
+    }
+
+    public static String trim(String str) {
+        return StringUtils.trim(str);
+    }
+
+    public static String strip(String str) {
+        return StringUtils.strip(str);
+    }
+
+    public static String deleteWhitespace(String str) {
+        return StringUtils.deleteWhitespace(str);
+    }
+
+    public static String reverse(String str) {
+        return StringUtils.reverse(str);
+    }
+
+    public static String repeat(String str, int repeat) {
+        return StringUtils.repeat(str, repeat);
+    }
+
+    public static String abbreviate(String str, int maxWidth) {
+        return StringUtils.abbreviate(str, maxWidth);
+    }
+
+    public static String defaultString(String str) {
+        return StringUtils.defaultString(str);
+    }
+
+    public static String leftPad(String str, int size) {
+        return StringUtils.leftPad(str, size);
+    }
+
+    public static String leftPad(String str, int size, String padStr) {
+        return StringUtils.leftPad(str, size, padStr);
+    }
+
+    public static String rightPad(String str, int size) {
+        return StringUtils.rightPad(str, size);
+    }
+
+    public static String rightPad(String str, int size, String padStr) {
+        return StringUtils.rightPad(str, size, padStr);
+    }
+
+    public static String substring(String str, int start) {
+        return StringUtils.substring(str, start);
+    }
+
+    public static String substring(String str, int start, int end) {
+        return StringUtils.substring(str, start, end);
+    }
+
+    public static String left(String str, int len) {
+        return StringUtils.left(str, len);
+    }
+
+    public static String right(String str, int len) {
+        return StringUtils.right(str, len);
+    }
+
+    public static String mid(String str, int pos, int len) {
+        return StringUtils.mid(str, pos, len);
+    }
+
+    public static String substringBefore(String str, String separator) {
+        return StringUtils.substringBefore(str, separator);
+    }
+
+    public static String substringAfter(String str, String separator) {
+        return StringUtils.substringAfter(str, separator);
+    }
+
+    public static String substringBeforeLast(String str, String separator) {
+        return StringUtils.substringBeforeLast(str, separator);
+    }
+
+    public static String substringAfterLast(String str, String separator) {
+        return StringUtils.substringAfterLast(str, separator);
+    }
+
+    public static String[] split(String str) {
+        return StringUtils.split(str);
+    }
+
+    public static String[] split(String str, String separatorChars) {
+        return StringUtils.split(str, separatorChars);
+    }
+
+    public static int countMatches(CharSequence str, CharSequence sub) {
+        return StringUtils.countMatches(str, sub);
+    }
+
+    // The methods below mirror StringUtils semantics (null-safe, literal matching)
+    // without calling the StringUtils overloads deprecated in commons-lang3 3.18+.
+
+    public static String replace(String text, String searchString, String replacement) {
+        if (text == null || StringUtils.isEmpty(searchString) || replacement == null) {
+            return text;
+        }
+        return text.replace(searchString, replacement);
+    }
+
+    public static String remove(String str, String toRemove) {
+        return replace(str, toRemove, "");
+    }
+
+    public static String removeStart(String str, String toRemove) {
+        if (str == null || StringUtils.isEmpty(toRemove)) {
+            return str;
+        }
+        return str.startsWith(toRemove) ? str.substring(toRemove.length()) : str;
+    }
+
+    public static String removeEnd(String str, String toRemove) {
+        if (str == null || StringUtils.isEmpty(toRemove)) {
+            return str;
+        }
+        return str.endsWith(toRemove) ? str.substring(0, str.length() - toRemove.length()) : str;
+    }
+
+    public static boolean contains(String str, String searchStr) {
+        if (str == null || searchStr == null) {
+            return false;
+        }
+        return str.contains(searchStr);
+    }
+
+    public static boolean containsIgnoreCase(String str, String searchStr) {
+        if (str == null || searchStr == null) {
+            return false;
+        }
+        int len = searchStr.length();
+        int max = str.length() - len;
+        for (int i = 0; i <= max; i++) {
+            if (str.regionMatches(true, i, searchStr, 0, len)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean startsWith(String str, String prefix) {
+        if (str == null || prefix == null) {
+            return str == null && prefix == null;
+        }
+        return str.startsWith(prefix);
+    }
+
+    public static boolean endsWith(String str, String suffix) {
+        if (str == null || suffix == null) {
+            return str == null && suffix == null;
+        }
+        return str.endsWith(suffix);
+    }
+
+    public static boolean equalsIgnoreCase(String str1, String str2) {
+        if (str1 == null || str2 == null) {
+            return str1 == str2;
+        }
+        return str1.equalsIgnoreCase(str2);
     }
 }

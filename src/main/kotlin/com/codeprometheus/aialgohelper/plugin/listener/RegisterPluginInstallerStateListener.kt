@@ -1,11 +1,10 @@
 package com.codeprometheus.aialgohelper.plugin.listener
 
-import com.intellij.ide.plugins.PluginManagerCore.getPlugin
 import com.intellij.ide.util.PropertiesComponent
-import com.intellij.openapi.extensions.PluginId
 import com.intellij.openapi.fileEditor.impl.HTMLEditorProvider
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.StartupActivity
+import com.intellij.openapi.util.JDOMUtil
 import com.codeprometheus.aialgohelper.plugin.model.PluginConstant
 import com.codeprometheus.aialgohelper.plugin.setting.PersistentConfig
 
@@ -14,7 +13,9 @@ import com.codeprometheus.aialgohelper.plugin.setting.PersistentConfig
  */
 class RegisterPluginInstallerStateListener : StartupActivity {
     override fun runActivity(project: Project) {
-        val newVersion = getPlugin(PluginId.getId(PluginConstant.PLUGIN_ID))!!.version
+        // Read the version from our own packaged descriptor instead of the plugin-manager
+        // lookup APIs, which are all @ApiStatus.Internal on recent platforms.
+        val newVersion = currentPluginVersion() ?: return
         val config = PersistentConfig.getInstance().initConfig
         val oldVersion: String?
         if (config == null) {
@@ -40,6 +41,11 @@ class RegisterPluginInstallerStateListener : StartupActivity {
             )
         }
     }
+
+    private fun currentPluginVersion(): String? =
+        javaClass.classLoader.getResourceAsStream("META-INF/plugin.xml")?.use { input ->
+            runCatching { JDOMUtil.load(input).getChildText("version") }.getOrNull()
+        }
 
     companion object {
         private const val ShowNewHTMLEditorKey = PluginConstant.PLUGIN_ID + "ShowNewHTMLEditor"

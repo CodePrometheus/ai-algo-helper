@@ -1,14 +1,16 @@
 package com.codeprometheus.aialgohelper.plugin.window;
 
 import com.intellij.openapi.Disposable;
+import com.intellij.openapi.actionSystem.DataSink;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.ui.components.JBTabbedPane;
+import com.intellij.ui.tabs.JBTabs;
+import com.intellij.ui.tabs.JBTabsFactory;
 import com.intellij.ui.tabs.TabInfo;
-import com.intellij.ui.tabs.impl.JBTabsImpl;
 import com.intellij.util.messages.MessageBusConnection;
 import com.codeprometheus.aialgohelper.plugin.listener.ConfigNotifier;
 import com.codeprometheus.aialgohelper.plugin.listener.LoginNotifier;
@@ -50,7 +52,7 @@ public class NavigatorTabsPanel extends SimpleToolWindowPanel implements Disposa
     private SimpleToolWindowPanel[] navigatorPanels;
     private TabInfo[] tabInfos;
 
-    private JBTabsImpl tabs;
+    private JBTabs tabs;
 
     private int toggleIndex = 0;
 
@@ -62,8 +64,8 @@ public class NavigatorTabsPanel extends SimpleToolWindowPanel implements Disposa
         navigatorPanels = new SimpleToolWindowPanel[3];
         tabInfos = new TabInfo[3];
 
-        tabs = new JBTabsImpl(project);
-        tabs.setHideTabs(true);
+        tabs = JBTabsFactory.createTabs(project, this);
+        tabs.getPresentation().setHideTabs(true);
 
         NavigatorPanel navigatorPanel = new NavigatorPanel(toolWindow, project);
         navigatorPanels[0] = navigatorPanel;
@@ -101,7 +103,7 @@ public class NavigatorTabsPanel extends SimpleToolWindowPanel implements Disposa
         }
 
         JBTabbedPane mainTabs = new JBTabbedPane();
-        mainTabs.addTab(PropertiesUtils.getInfo("study.tab.questions"), tabs);
+        mainTabs.addTab(PropertiesUtils.getInfo("study.tab.questions"), tabs.getComponent());
         mainTabs.addTab(PropertiesUtils.getInfo("study.tab.lists"), new StudyListsPanel(project));
         setContent(mainTabs);
 
@@ -191,24 +193,13 @@ public class NavigatorTabsPanel extends SimpleToolWindowPanel implements Disposa
     }
 
     @Override
-    public Object getData(String dataId) {
-        for (SimpleToolWindowPanel navigatorPanel : navigatorPanels) {
-            Object object = navigatorPanel.getData(dataId);
-            if (object != null) {
-                return object;
-            }
+    public void uiDataSnapshot(@NotNull DataSink sink) {
+        super.uiDataSnapshot(sink);
+        sink.set(DataKeys.LEETCODE_PROJECTS_TABS, this);
+        SimpleToolWindowPanel panel = navigatorPanels[toggleIndex];
+        if (panel instanceof NavigatorPanelAction) {
+            sink.set(DataKeys.LEETCODE_PROJECTS_NAVIGATORACTION, ((NavigatorPanelAction) panel).getNavigatorAction());
         }
-        if (DataKeys.LEETCODE_PROJECTS_TABS.is(dataId)) {
-            return this;
-        }
-        if (DataKeys.LEETCODE_PROJECTS_NAVIGATORACTION.is(dataId)) {
-            SimpleToolWindowPanel panel = navigatorPanels[toggleIndex];
-            if (panel instanceof NavigatorPanelAction) {
-                return ((NavigatorPanelAction) panel).getNavigatorAction();
-            }
-        }
-
-        return super.getData(dataId);
     }
 
     @Override

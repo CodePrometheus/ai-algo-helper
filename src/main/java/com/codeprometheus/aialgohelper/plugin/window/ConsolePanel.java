@@ -4,7 +4,7 @@ import com.intellij.execution.filters.TextConsoleBuilderFactory;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionToolbar;
-import com.intellij.openapi.actionSystem.DataProvider;
+import com.intellij.openapi.actionSystem.DataSink;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * @author shuzijun
  */
-public class ConsolePanel extends SimpleToolWindowPanel implements DataProvider {
+public class ConsolePanel extends SimpleToolWindowPanel {
 
     private ConsoleView consoleView;
 
@@ -37,11 +37,11 @@ public class ConsolePanel extends SimpleToolWindowPanel implements DataProvider 
     }
 
     @Override
-    public @Nullable Object getData(@NotNull @NonNls String dataId) {
-        if (DataKeys.LEETCODE_CONSOLE_VIEW.is(dataId)) {
-            return consoleView;
+    public void uiDataSnapshot(@NotNull DataSink sink) {
+        super.uiDataSnapshot(sink);
+        if (consoleView != null) {
+            sink.set(DataKeys.LEETCODE_CONSOLE_VIEW, consoleView);
         }
-        return super.getData(dataId);
     }
 
     public void dispose() {

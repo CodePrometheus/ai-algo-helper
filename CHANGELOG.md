@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Replaced all IntelliJ Platform internal, override-only, and deprecated API usages with supported public APIs; the Marketplace compatibility verification is now fully clean.
+- Determined the plugin version from the packaged descriptor instead of plugin-manager lookups.
+
 ## 1.0.0
 
 ### Added

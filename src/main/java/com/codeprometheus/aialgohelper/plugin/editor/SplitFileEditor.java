@@ -6,7 +6,6 @@ import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.actionSystem.ActionToolbar;
-import com.intellij.openapi.actionSystem.impl.ActionToolbarImpl;
 import com.intellij.openapi.fileEditor.*;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.Key;
@@ -179,9 +178,8 @@ public abstract class SplitFileEditor<E1 extends FileEditor, E2 extends FileEdit
             throw new IllegalStateException(groupId + " should have been a group");
         }
         final ActionGroup group = ((ActionGroup) actionManager.getAction(groupId));
-        final ActionToolbarImpl editorToolbar =
-                ((ActionToolbarImpl) actionManager.createActionToolbar(ActionPlaces.EDITOR_TOOLBAR, group, true));
-        editorToolbar.setBorder(new JBEmptyBorder(0, 2, 0, 2));
+        final ActionToolbar editorToolbar = actionManager.createActionToolbar(ActionPlaces.EDITOR_TOOLBAR, group, true);
+        editorToolbar.getComponent().setBorder(new JBEmptyBorder(0, 2, 0, 2));
 
         return editorToolbar;
     }
