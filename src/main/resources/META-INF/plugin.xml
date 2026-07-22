@@ -1,27 +1,13 @@
 <idea-plugin>
     <id>com.codeprometheus.aialgohelper</id>
     <name>AI Algo Helper</name>
-    <version>1.0.0</version>
-    <vendor url="https://github.com/CodePrometheus">Zixin Zhou · GitHub@CodePrometheus</vendor>
+    <vendor email="zhouzixin@apache.org" url="https://github.com/CodePrometheus">Zixin Zhou · GitHub@CodePrometheus</vendor>
 
-    <description><![CDATA[]]></description>
+    <!-- version, description, change-notes and idea-version are injected by patchPluginXml at build time -->
 
-    <change-notes>
-    </change-notes>
-
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-    <idea-version since-build="202.0"/>
-
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
-    <!-- uncomment to enable plugin in all products -->
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
     <depends>com.intellij.modules.jcef</depends>
-
-    <application-components>
-
-    </application-components>
 
     <extensions defaultExtensionNs="com.intellij">
         <postStartupActivity  implementation = "com.codeprometheus.aialgohelper.plugin.listener.RegisterPluginInstallerStateListener"/>

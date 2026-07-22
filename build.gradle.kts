@@ -1,6 +1,7 @@
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
+import org.jetbrains.intellij.platform.gradle.tasks.VerifyPluginTask.FailureLevel
 
 plugins {
     id("java") // Java support
@@ -10,7 +11,8 @@ plugins {
 }
 
 group = providers.gradleProperty("pluginGroup").get()
-version = System.getenv("LD_VERSION") ?: providers.gradleProperty("pluginVersion").get()
+val pluginVersionProvider = providers.environmentVariable("LD_VERSION").orElse(providers.gradleProperty("pluginVersion"))
+version = pluginVersionProvider.get()
 
 // IntelliJ Platform 2026.2 runs on Java 25.
 kotlin {
@@ -31,9 +33,13 @@ repositories {
 
 // Dependencies are managed with Gradle version catalog - read more: https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
 dependencies {
-    api("com.alibaba:fastjson:1.2.47")
-    api("org.jsoup:jsoup:1.11.3")
-    api("org.apache.commons:commons-lang3:3.9")
+    api("com.alibaba:fastjson:1.2.83")
+    api("org.jsoup:jsoup:1.21.1")
+    api("org.apache.commons:commons-lang3:3.20.0")
+    // Bundle Velocity explicitly instead of borrowing the IDE's copy; logging goes through the platform slf4j.
+    api("org.apache.velocity:velocity-engine-core:2.4.1") {
+        exclude(group = "org.slf4j")
+    }
     api("com.vladsch.flexmark:flexmark:0.62.2")
     api("com.vladsch.flexmark:flexmark-ext-attributes:0.62.2")
     api("io.github.biezhi:TinyPinyin:2.0.3.RELEASE")
@@ -87,7 +93,8 @@ intellijPlatform {
 
         ideaVersion {
             sinceBuild = providers.gradleProperty("pluginSinceBuild")
-            untilBuild = providers.gradleProperty("pluginUntilBuild")
+            // No upper bound: the Gradle plugin would otherwise default until-build to "<since>.*".
+            untilBuild = provider { null }
         }
     }
 
@@ -96,10 +103,16 @@ intellijPlatform {
         // The pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels, like 2.1.7-alpha.3
         // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
         // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
-        channels = providers.gradleProperty("pluginVersion").map { listOf(it.substringAfter('-', "").substringBefore('.').ifEmpty { "default" }) }
+        channels = pluginVersionProvider.map { listOf(it.substringAfter('-', "").substringBefore('.').ifEmpty { "default" }) }
     }
 
     pluginVerification {
+        // Gate releases on real compatibility breakage only; internal/override-only API usages
+        // inherited from upstream are still reported in the verifier output but do not fail the build.
+        failureLevel = listOf(
+            FailureLevel.COMPATIBILITY_PROBLEMS,
+            FailureLevel.INVALID_PLUGIN,
+        )
         ides {
             recommended()
         }
@@ -129,10 +142,6 @@ tasks {
 
     wrapper {
         gradleVersion = providers.gradleProperty("gradleVersion").get()
-    }
-
-    publishPlugin {
-        dependsOn(patchChangelog)
     }
 }
 

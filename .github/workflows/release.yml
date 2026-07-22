@@ -36,6 +36,11 @@ jobs:
           java-version: '25'
           cache: gradle
 
+      - name: Run Plugin Verifier
+        run: ./gradlew verifyPlugin
+        env:
+          LD_VERSION: ${{ env.LD_VERSION }}
+
       - name: Test and publish the plugin
         run: ./gradlew test publishPlugin
         env:
