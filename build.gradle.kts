@@ -2,6 +2,7 @@ import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 import org.jetbrains.intellij.platform.gradle.tasks.VerifyPluginTask.FailureLevel
+import org.gradle.api.artifacts.ResolutionStrategy
 
 plugins {
     id("java") // Java support
@@ -32,17 +33,22 @@ repositories {
 }
 
 // Dependencies are managed with Gradle version catalog - read more: https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
+configurations.all {
+    resolutionStrategy.sortArtifacts(ResolutionStrategy.SortOrder.DEPENDENCY_FIRST)
+}
+
 dependencies {
-    api("com.alibaba:fastjson:1.2.83")
-    api("org.jsoup:jsoup:1.21.1")
-    api("org.apache.commons:commons-lang3:3.20.0")
-    // Bundle Velocity explicitly instead of borrowing the IDE's copy; logging goes through the platform slf4j.
-    api("org.apache.velocity:velocity-engine-core:2.4.1") {
-        exclude(group = "org.slf4j")
+    implementation("com.alibaba:fastjson:2.0.62")
+    implementation("org.jsoup:jsoup:1.22.2")
+    implementation("org.apache.commons:commons-lang3:3.20.0")
+    implementation("com.vladsch.flexmark:flexmark:0.64.8") {
+        exclude(group = "org.jetbrains", module = "annotations")
     }
-    api("com.vladsch.flexmark:flexmark:0.62.2")
-    api("com.vladsch.flexmark:flexmark-ext-attributes:0.62.2")
-    api("io.github.biezhi:TinyPinyin:2.0.3.RELEASE")
+    implementation("com.vladsch.flexmark:flexmark-ext-attributes:0.64.8") {
+        exclude(group = "org.jetbrains", module = "annotations")
+    }
+    implementation("io.github.biezhi:TinyPinyin:2.0.3.RELEASE")
+    implementation("org.ahocorasick:ahocorasick:0.6.3")
     // api(fileTree(mapOf("dir" to "src/main/resources/lib", "include" to listOf("*.jar"))))
 
     testImplementation(libs.junit)

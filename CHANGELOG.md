@@ -4,6 +4,17 @@
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-07-23
+
+### Changed
+
+- Updated Fastjson compatibility support to 2.0.62, jsoup to 1.22.2, flexmark-java to 0.64.8, and Aho-Corasick to 0.6.3.
+
+### Fixed
+
+- Replaced direct Apache Velocity initialization with IntelliJ's supported file-template API, preventing classloader conflicts when opening problem files.
+- Removed the automatic GitHub changelog tab that opened after plugin updates.
+
 ## [1.0.1] - 2026-07-22
 
 ### Changed

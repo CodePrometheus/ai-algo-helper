@@ -20,7 +20,7 @@ AI Algo Helper is an IntelliJ IDEA plugin for algorithm practice.
 
 ## Current release
 
-The current version is `1.0.0`. See the [changelog](CHANGELOG.md) for the complete release notes.
+The current version is `1.0.2`. See the [changelog](CHANGELOG.md) for the complete release notes.
 
 ## Compatibility
 

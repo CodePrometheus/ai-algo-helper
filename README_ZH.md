@@ -20,7 +20,7 @@ AI Algo Helper 是一款用于算法练习的 IntelliJ IDEA 插件。
 
 ## 当前版本
 
-当前版本为 `1.0.0`，完整版本记录请查看 [CHANGELOG.md](CHANGELOG.md)。
+当前版本为 `1.0.2`，完整版本记录请查看 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 兼容性
 

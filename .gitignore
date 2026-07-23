@@ -50,6 +50,7 @@ hs_err_pid*
 .idea/**/dbnavigator.xml
 
 # Gradle
+.kotlin/
 .idea/**/gradle.xml
 .idea/**/libraries
 .intellijPlatform
